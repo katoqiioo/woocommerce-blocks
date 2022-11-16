@@ -1374,6 +1374,7 @@
     Type &apos;Partial&lt;ColorProps&gt; | { text: true; background: true; link: false; gradients: true; __experimentalSkipSerialization: true; } | undefined&apos; is not assignable to type &apos;Partial&lt;ColorProps&gt; | undefined&apos;.
       Type &apos;{ text: true; background: true; link: false; gradients: true; __experimentalSkipSerialization: true; }&apos; is not assignable to type &apos;Partial&lt;ColorProps&gt;&apos;.
         Object literal may only specify known properties, and &apos;__experimentalSkipSerialization&apos; does not exist in type &apos;Partial&lt;ColorProps&gt;&apos;." source="TS2322" />
+<<<<<<< HEAD
 	</file>
 	<file name="assets/js/atomic/blocks/product-elements/price/edit.tsx">
 		<error line="33" column="40" severity="error" message="Cannot find name &apos;BlockAttributes&apos;." source="TS2304" />
@@ -1396,6 +1397,31 @@
 	</file>
 	<file name="assets/js/atomic/blocks/product-elements/image/index.js">
 		<error line="46" column="1" severity="error" message="No overload matches this call.
+=======
+</file>
+<file name="assets/js/atomic/blocks/product-elements/price/edit.tsx">
+<error line="64" column="25" severity="error" message="Type &apos;string | undefined&apos; is not assignable to type &apos;&quot;center&quot; | &quot;left&quot; | &quot;right&quot; | undefined&apos; with &apos;exactOptionalPropertyTypes: true&apos;. Consider adding &apos;undefined&apos; to the type of the target." source="TS2412" />
+</file>
+<file name="assets/js/atomic/blocks/product-elements/price/index.ts">
+<error line="34" column="2" severity="error" message="Type &apos;{ color?: Partial&lt;ColorProps&gt; | { text: boolean; background: boolean; link: boolean; __experimentalSkipSerialization: boolean; } | undefined; typography?: Partial&lt;TypographyProps&gt; | { ...; } | undefined; ... 11 more ...; lock?: boolean | undefined; }&apos; is not assignable to type &apos;BlockSupports&apos;.
+  Types of property &apos;color&apos; are incompatible.
+    Type &apos;Partial&lt;ColorProps&gt; | { text: boolean; background: boolean; link: boolean; __experimentalSkipSerialization: boolean; } | undefined&apos; is not assignable to type &apos;Partial&lt;ColorProps&gt; | undefined&apos;.
+      Type &apos;{ text: boolean; background: boolean; link: boolean; __experimentalSkipSerialization: boolean; }&apos; is not assignable to type &apos;Partial&lt;ColorProps&gt;&apos;.
+        Types of property &apos;text&apos; are incompatible.
+          Type &apos;boolean&apos; is not assignable to type &apos;string&apos;." source="TS2322" />
+</file>
+<file name="assets/js/atomic/blocks/product-elements/image/edit.js">
+<error line="14" column="2" severity="error" message="Module &apos;&quot;@wordpress/components&quot;&apos; has no exported member &apos;__experimentalToggleGroupControl&apos;." source="TS2305" />
+<error line="16" column="2" severity="error" message="Module &apos;&quot;@wordpress/components&quot;&apos; has no exported member &apos;__experimentalToggleGroupControlOption&apos;." source="TS2305" />
+<error line="24" column="18" severity="error" message="Binding element &apos;attributes&apos; implicitly has an &apos;any&apos; type." source="TS7031" />
+<error line="24" column="30" severity="error" message="Binding element &apos;setAttributes&apos; implicitly has an &apos;any&apos; type." source="TS7031" />
+<error line="24" column="45" severity="error" message="Binding element &apos;context&apos; implicitly has an &apos;any&apos; type." source="TS7031" />
+<error line="94" column="21" severity="error" message="Parameter &apos;value&apos; implicitly has an &apos;any&apos; type." source="TS7006" />
+<error line="146" column="21" severity="error" message="Parameter &apos;value&apos; implicitly has an &apos;any&apos; type." source="TS7006" />
+</file>
+<file name="assets/js/atomic/blocks/product-elements/image/index.js">
+<error line="46" column="1" severity="error" message="No overload matches this call.
+>>>>>>> 81dabd5cc (bot: update checkstyle.xml)
   Overload 1 of 2, &apos;(metadata: BlockConfiguration&lt;{}&gt;, settings?: Partial&lt;BlockConfiguration&lt;{}&gt;&gt; | undefined): Block&lt;{}&gt; | undefined&apos;, gave the following error.
     Argument of type &apos;string&apos; is not assignable to parameter of type &apos;BlockConfiguration&lt;{}&gt;&apos;.
       Type &apos;string&apos; is not assignable to type &apos;Pick&lt;Block&lt;{}&gt;, &quot;title&quot; | &quot;category&quot; | &quot;attributes&quot;&gt;&apos;.
@@ -2239,6 +2265,7 @@
       Property &apos;attributes&apos; is missing in type &apos;{ name: string; version: string; title: string; description: string; category: string; supports: { align: boolean; html: boolean; multiple: boolean; reusable: boolean; inserter: boolean; }; parent: string[]; textdomain: string; apiVersion: number; }&apos; but required in type &apos;Pick&lt;Block&lt;{}&gt;, &quot;title&quot; | &quot;category&quot; | &quot;attributes&quot;&gt;&apos;.
   Overload 2 of 2, &apos;(name: string, settings: BlockConfiguration&lt;{}&gt;): Block&lt;{}&gt; | undefined&apos;, gave the following error.
     Argument of type &apos;{ name: string; version: string; title: string; description: string; category: string; supports: { align: boolean; html: boolean; multiple: boolean; reusable: boolean; inserter: boolean; }; parent: string[]; textdomain: string; apiVersion: number; }&apos; is not assignable to parameter of type &apos;string&apos;." source="TS2769" />
+<<<<<<< HEAD
 	</file>
 	<file name="assets/js/blocks/cart/cart-cross-sells-product-list/cart-cross-sells-product.tsx">
 		<error line="51" column="8" severity="error" message="Type &apos;{}&apos; is missing the following properties from type &apos;BlockAttributes&apos;: productId, align" source="TS2739" />
@@ -2246,6 +2273,15 @@
 	</file>
 	<file name="assets/js/blocks/cart/inner-blocks/cart-cross-sells-products/index.tsx">
 		<error line="13" column="20" severity="error" message="No overload matches this call.
+=======
+</file>
+<file name="assets/js/blocks/cart/cart-cross-sells-product-list/cart-cross-sells-product.tsx">
+<error line="51" column="8" severity="error" message="Type &apos;{}&apos; is missing the following properties from type &apos;BlockAttributes&apos;: productId, align" source="TS2739" />
+<error line="52" column="8" severity="error" message="Type &apos;{}&apos; is missing the following properties from type &apos;BlockAttributes&apos;: productId, className, textAlign, isDescendentOfQueryLoop" source="TS2739" />
+</file>
+<file name="assets/js/blocks/cart/inner-blocks/cart-cross-sells-products/index.tsx">
+<error line="13" column="20" severity="error" message="No overload matches this call.
+>>>>>>> 81dabd5cc (bot: update checkstyle.xml)
   Overload 1 of 2, &apos;(metadata: BlockConfiguration&lt;{ className?: string; columns: number; }&gt;, settings?: Partial&lt;BlockConfiguration&lt;{ className?: string; columns: number; }&gt;&gt; | undefined): Block&lt;...&gt; | undefined&apos;, gave the following error.
     Argument of type &apos;{ name: string; version: string; title: string; description: string; category: string; supports: { align: boolean; html: boolean; multiple: boolean; reusable: boolean; inserter: boolean; lock: boolean; }; attributes: { ...; }; parent: string[]; textdomain: string; apiVersion: number; }&apos; is not assignable to parameter of type &apos;BlockConfiguration&lt;{ className?: string; columns: number; }&gt;&apos;.
       Type &apos;{ name: string; version: string; title: string; description: string; category: string; supports: { align: boolean; html: boolean; multiple: boolean; reusable: boolean; inserter: boolean; lock: boolean; }; attributes: { ...; }; parent: string[]; textdomain: string; apiVersion: number; }&apos; is not assignable to type &apos;Partial&lt;Omit&lt;Block&lt;{ className?: string; columns: number; }&gt;, &quot;icon&quot;&gt;&gt;&apos;.
