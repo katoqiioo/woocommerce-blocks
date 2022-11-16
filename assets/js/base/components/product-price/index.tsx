@@ -31,13 +31,13 @@ interface PriceRangeProps {
 	 *
 	 * **Note:** this excludes the dash in between the elements
 	 */
-	priceClassName?: string;
+	priceClassName?: string | undefined;
 	/**
 	 * Any custom style to be applied to each of the elements containing the prices
 	 *
 	 * **Note:** this excludes the dash in between the elements
 	 */
-	priceStyle?: React.CSSProperties;
+	priceStyle?: React.CSSProperties | undefined;
 }
 
 const PriceRange = ( {
@@ -95,13 +95,13 @@ interface SalePriceProps {
 	 *
 	 * i.e. `<del>` element
 	 */
-	regularPriceClassName?: string;
+	regularPriceClassName?: string | undefined;
 	/**
 	 * Custom style to be applied to the regular price container
 	 *
 	 * i.e. `<del>` element
 	 */
-	regularPriceStyle?: React.CSSProperties;
+	regularPriceStyle?: React.CSSProperties | undefined;
 	/**
 	 * The regular price before the sale
 	 */
@@ -111,13 +111,13 @@ interface SalePriceProps {
 	 *
 	 * i.e. `<ins>` element
 	 */
-	priceClassName?: string;
+	priceClassName?: string | undefined;
 	/**
 	 * Custom style to be applied to the regular price container
 	 *
 	 * i.e. `<ins>` element
 	 */
-	priceStyle?: React.CSSProperties;
+	priceStyle?: React.CSSProperties | undefined;
 	/**
 	 * The new price during the sale
 	 */
