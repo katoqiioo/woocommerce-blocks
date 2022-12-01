@@ -10,6 +10,8 @@ import { usePositionRelativeToViewport } from '@woocommerce/base-hooks';
 import { getSetting } from '@woocommerce/settings';
 import { useSelect } from '@wordpress/data';
 import { CHECKOUT_STORE_KEY } from '@woocommerce/block-data';
+import { isErrorResponse } from '@woocommerce/base-context';
+import { useCartEventsContext } from '@woocommerce/base-context/providers';
 
 /**
  * Internal dependencies
@@ -56,16 +58,30 @@ const Block = ( {
 		};
 	}, [] );
 
+	const { dispatchOnProceedToCheckout } = useCartEventsContext();
+
 	const submitContainerContents = (
-		<Button
-			className="wc-block-cart__submit-button"
-			href={ link || CHECKOUT_URL }
-			disabled={ isCalculating }
-			onClick={ () => setShowSpinner( true ) }
-			showSpinner={ showSpinner }
-		>
-			{ __( 'Proceed to Checkout', 'woo-gutenberg-products-block' ) }
-		</Button>
+		<div>
+			<Button
+				className="wc-block-cart__submit-button"
+				href={ link || CHECKOUT_URL }
+				disabled={ isCalculating }
+				onClick={ ( e ) => {
+					dispatchOnProceedToCheckout().then(
+						( observerResponses ) => {
+							if ( observerResponses.some( isErrorResponse ) ) {
+								e.preventDefault();
+								return;
+							}
+							setShowSpinner( true );
+						}
+					);
+				} }
+				showSpinner={ showSpinner }
+			>
+				{ __( 'Proceed to Checkout', 'woo-gutenberg-products-block' ) }
+			</Button>
+		</div>
 	);
 
 	return (
