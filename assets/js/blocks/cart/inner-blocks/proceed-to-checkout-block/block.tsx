@@ -61,27 +61,23 @@ const Block = ( {
 	const { dispatchOnProceedToCheckout } = useCartEventsContext();
 
 	const submitContainerContents = (
-		<div>
-			<Button
-				className="wc-block-cart__submit-button"
-				href={ link || CHECKOUT_URL }
-				disabled={ isCalculating }
-				onClick={ ( e ) => {
-					dispatchOnProceedToCheckout().then(
-						( observerResponses ) => {
-							if ( observerResponses.some( isErrorResponse ) ) {
-								e.preventDefault();
-								return;
-							}
-							setShowSpinner( true );
-						}
-					);
-				} }
-				showSpinner={ showSpinner }
-			>
-				{ __( 'Proceed to Checkout', 'woo-gutenberg-products-block' ) }
-			</Button>
-		</div>
+		<Button
+			className="wc-block-cart__submit-button"
+			href={ link || CHECKOUT_URL }
+			disabled={ isCalculating }
+			onClick={ ( e ) => {
+				dispatchOnProceedToCheckout().then( ( observerResponses ) => {
+					if ( observerResponses.some( isErrorResponse ) ) {
+						e.preventDefault();
+						return;
+					}
+					setShowSpinner( true );
+				} );
+			} }
+			showSpinner={ showSpinner }
+		>
+			{ __( 'Proceed to Checkout', 'woo-gutenberg-products-block' ) }
+		</Button>
 	);
 
 	return (
