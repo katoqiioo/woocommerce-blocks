@@ -86,9 +86,9 @@ const Checkout = ( {
 
 	if (
 		isLoginRequired( customerId ) &&
-		getSetting( 'checkoutAllowsSignup', false )
+		! getSetting( 'checkoutAllowsSignup', false )
 	) {
-		<LoginPrompt />;
+		return <LoginPrompt />;
 	}
 
 	return (
