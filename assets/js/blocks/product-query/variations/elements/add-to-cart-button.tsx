@@ -28,6 +28,15 @@ registerElementVariation( CORE_NAME, {
 	blockDescription: BLOCK_DESCRIPTION,
 	blockTitle: BLOCK_TITLE,
 	variationName: VARIATION_NAME,
+	innerBlocks: [
+		[
+			'core/button',
+			{
+				text: __( 'Add to cart', 'woo-gutenberg-products-block' ),
+				align: 'center',
+			},
+		],
+	],
 } );
 
 /**
@@ -72,28 +81,28 @@ export const withCoreButtonVariation =
 		}, [ isWoocommerceVariation, props.isSelected ] );
 
 		// When variation is added to editor, initialize attributes with default values
-		if (
-			isCoreButton &&
-			isWoocommerceVariation &&
-			! props.attributes?.text?.length
-		) {
-			props.setAttributes( {
-				...props.attributes,
-				text: __( 'Add to cart', 'woo-gutenberg-products-block' ),
-				style: {
-					spacing: {
-						padding: {
-							top: 'var:preset|spacing|30',
-							right: 'var:preset|spacing|40',
-							bottom: 'var:preset|spacing|30',
-							left: 'var:preset|spacing|40',
-						},
-					},
-				},
-				align: 'center',
-				fontSize: 'small',
-			} );
-		}
+		// if (
+		// 	isCoreButton &&
+		// 	isWoocommerceVariation &&
+		// 	! props.attributes?.text?.length
+		// ) {
+		// 	props.setAttributes( {
+		// 		...props.attributes,
+		// 		text: __( 'Add to cart', 'woo-gutenberg-products-block' ),
+		// 		style: {
+		// 			spacing: {
+		// 				padding: {
+		// 					top: 'var:preset|spacing|30',
+		// 					right: 'var:preset|spacing|40',
+		// 					bottom: 'var:preset|spacing|30',
+		// 					left: 'var:preset|spacing|40',
+		// 				},
+		// 			},
+		// 		},
+		// 		align: 'center',
+		// 		fontSize: 'small',
+		// 	} );
+		// }
 
 		return <BlockEdit { ...props } />;
 	};

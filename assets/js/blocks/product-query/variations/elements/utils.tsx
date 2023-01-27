@@ -1,18 +1,25 @@
 /**
  * External dependencies
  */
-import { registerBlockVariation } from '@wordpress/blocks';
+import { InnerBlockTemplate, registerBlockVariation } from '@wordpress/blocks';
 
 interface VariationDetails {
 	blockDescription: string;
 	blockIcon?: JSX.Element;
 	blockTitle: string;
 	variationName: string;
+	innerBlocks?: InnerBlockTemplate[];
 }
 
 export function registerElementVariation(
 	coreName: string,
-	{ blockDescription, blockIcon, blockTitle, variationName }: VariationDetails
+	{
+		blockDescription,
+		blockIcon,
+		blockTitle,
+		variationName,
+		innerBlocks,
+	}: VariationDetails
 ) {
 	registerBlockVariation( coreName, {
 		description: blockDescription,
@@ -26,6 +33,9 @@ export function registerElementVariation(
 		scope: [ 'block', 'inserter' ],
 		...( blockIcon && {
 			icon: blockIcon,
+		} ),
+		...( innerBlocks && {
+			innerBlocks,
 		} ),
 	} );
 }
