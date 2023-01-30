@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
 import { select } from '@wordpress/data';
 import { EditorBlock } from '@woocommerce/types';
-import { ElementType, useEffect } from 'react';
+import { ElementType, useEffect, useRef } from 'react';
 import { createHigherOrderComponent } from '@wordpress/compose';
 
 /**
@@ -31,19 +31,13 @@ registerElementVariation( CORE_NAME, {
 	variationName: VARIATION_NAME,
 } );
 
-const removeLinkToolbarButton = () => {
-	const linkElement: HTMLElement | null = document.querySelector(
-		'.edit-post-visual-editor button[name="link"]'
-	);
-	if ( linkElement ) linkElement.style.display = 'none';
-};
-
 /**
  * This helps us in modifying the UI in editor for the button block variation
  */
 const withCoreButtonVariation = createHigherOrderComponent(
 	< T extends EditorBlock< T > >( BlockListBlock: ElementType ) => {
 		return ( props ) => {
+			const styleRef = useRef( null );
 			const isCoreButton = props.name === 'core/button';
 
 			// Calculate if `core/button` is variation using it's parent block i.e. `core/buttons`
@@ -71,9 +65,22 @@ const withCoreButtonVariation = createHigherOrderComponent(
 			 */
 			useEffect( () => {
 				if ( isWoocommerceVariation && props.isSelected ) {
-					removeLinkToolbarButton();
+					const styleEl = document.createElement( 'style' );
+					styleEl.innerHTML = `
+						.edit-post-visual-editor button[name="link"] {
+							display: none;
+						}
+					`;
+					styleRef.current = styleEl;
+					document.head.appendChild( styleEl );
 				}
-			} );
+
+				return () => {
+					if ( isWoocommerceVariation && props.isSelected ) {
+						document.head.removeChild( styleRef.current );
+					}
+				};
+			}, [ isWoocommerceVariation, props.isSelected ] );
 
 			// When variation is added to editor, initialize attributes with default values
 			if (
@@ -99,25 +106,7 @@ const withCoreButtonVariation = createHigherOrderComponent(
 				} );
 			}
 
-			return (
-				<BlockListBlock
-					{ ...props }
-					wrapperProps={ {
-						/**
-						 * Sometimes editor.BlockListBlock filter is not called
-						 * when the toolbar menu re-renders therefore we also
-						 * need to hide the link toolbar button onClick event.
-						 *
-						 * More info: https://github.com/woocommerce/woocommerce-blocks/pull/8267#discussion_r1088883081
-						 */
-						onClick: () => {
-							if ( isWoocommerceVariation ) {
-								removeLinkToolbarButton();
-							}
-						},
-					} }
-				/>
-			);
+			return <BlockListBlock { ...props } />;
 		};
 	},
 	'withCoreButtonVariation'
