@@ -10,7 +10,7 @@ import Rating, {
 import {
 	usePrevious,
 	useShallowEqual,
-	useBorderProps,
+	useStyleProps,
 } from '@woocommerce/base-hooks';
 import {
 	useQueryStateByKey,
@@ -124,7 +124,7 @@ const RatingFilterBlock = ( {
 	 */
 	const [ remountKey, setRemountKey ] = useState( generateUniqueId() );
 
-	const borderProps = useBorderProps( blockAttributes );
+	const styleProps = useStyleProps( blockAttributes );
 	const [ displayNoProductRatingsNotice, setDisplayNoProductRatingsNotice ] =
 		useState( false );
 
@@ -347,12 +347,12 @@ const RatingFilterBlock = ( {
 					<>
 						<FormTokenField
 							key={ remountKey }
-							className={ classnames( borderProps.className, {
+							className={ classnames( styleProps.className, {
 								'single-selection': ! multiple,
 								'is-loading': isLoading,
 							} ) }
 							style={ {
-								...borderProps.style,
+								...styleProps.style,
 								borderStyle: 'none',
 							} }
 							suggestions={ displayedOptions

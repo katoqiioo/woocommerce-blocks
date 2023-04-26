@@ -5,13 +5,12 @@
  */
 import type { BlockAlignment } from '@wordpress/blocks';
 import { ProductResponseItem } from '@woocommerce/types';
-import { __experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles } from '@wordpress/block-editor';
 import { Icon, Placeholder, Spinner } from '@wordpress/components';
 import classnames from 'classnames';
 import { isEmpty } from 'lodash';
 import { useCallback, useState } from '@wordpress/element';
 import { WP_REST_API_Category } from 'wp-types';
-import { useBorderProps } from '@woocommerce/base-hooks';
+import { useStyleProps } from '@woocommerce/base-hooks';
 import type { ComponentType, Dispatch, SetStateAction } from 'react';
 
 /**
@@ -152,7 +151,7 @@ export const withFeaturedItem =
 			</Placeholder>
 		);
 
-		const borderProps = useBorderProps( attributes );
+		const styleProps = useStyleProps( attributes );
 
 		const renderItem = () => {
 			const {
@@ -184,7 +183,8 @@ export const withFeaturedItem =
 					'is-repeated': isRepeated,
 				},
 				dimRatioToClass( dimRatio ),
-				contentAlign !== 'center' && `has-${ contentAlign }-content`
+				contentAlign !== 'center' && `has-${ contentAlign }-content`,
+				styleProps.className
 			);
 
 			const containerStyle = {
@@ -196,7 +196,7 @@ export const withFeaturedItem =
 			};
 
 			const wrapperStyle = {
-				...getSpacingClassesAndStyles( attributes ).style,
+				...styleProps.style,
 				minHeight,
 			};
 
@@ -225,7 +225,7 @@ export const withFeaturedItem =
 					/>
 					<div
 						className={ classes }
-						style={ { containerStyle, ...borderProps.style } }
+						style={ { containerStyle, ...styleProps.style } }
 					>
 						<div
 							className={ `${ className }__wrapper` }
