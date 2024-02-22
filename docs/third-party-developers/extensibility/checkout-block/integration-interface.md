@@ -1,17 +1,25 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # `IntegrationRegistry` and `IntegrationInterface` <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
 
-- [The problem](#the-problem)
-- [The solution](#the-solution)
-- [`IntegrationInterface` methods](#integrationinterface-methods)
-    - [`get_name()`](#get_name)
-    - [`initialize()`](#initialize)
-    - [`get_script_handles()`](#get_script_handles)
-    - [`get_editor_script_handles()`](#get_editor_script_handles)
-    - [`get_script_data()`](#get_script_data)
-- [Usage example](#usage-example)
-    - [Getting data added in `get_script_data`](#getting-data-added-in-get_script_data)
+-   [The problem](#the-problem)
+-   [The solution](#the-solution)
+-   [`IntegrationInterface` methods](#integrationinterface-methods)
+    -   [`get_name()`](#get_name)
+    -   [`initialize()`](#initialize)
+    -   [`get_script_handles()`](#get_script_handles)
+    -   [`get_editor_script_handles()`](#get_editor_script_handles)
+    -   [`get_script_data()`](#get_script_data)
+-   [Usage example](#usage-example)
+    -   [Getting data added in `get_script_data`](#getting-data-added-in-get_script_data)
 
 ## The problem
 
@@ -19,9 +27,9 @@ You are an extension developer, and to allow users to interact with your extensi
 
 ## The solution
 
-You may use the `IntegrationRegistry` to register an `IntegrationInterface` this will be a class that will handle the enqueuing of scripts, styles, and data. You may have a different `IntegrationInterface` for each block (Mini Cart, Cart and Checkout), or you may use the same one, it is entirely dependent on your use case.
+You may use the `IntegrationRegistry` to register an `IntegrationInterface` this will be a class that will handle the enqueuing of scripts, styles, and data. You may have a different `IntegrationInterface` for each block (Mini-Cart, Cart and Checkout), or you may use the same one, it is entirely dependent on your use case.
 
-You should use the hooks: `woocommerce_blocks_mini-cart_block_registration`. `woocommerce_blocks_cart_block_registration` and `woocommerce_blocks_checkout_block_registration`. These hooks both pass an instance of [`IntegrationRegistry`](https://github.com/woocommerce/woocommerce-gutenberg-products-block/blob/trunk/src/Integrations/IntegrationRegistry.php) to the callback.
+You should use the hooks: `woocommerce_blocks_mini-cart_block_registration`. `woocommerce_blocks_cart_block_registration` and `woocommerce_blocks_checkout_block_registration`. These hooks pass an instance of [`IntegrationRegistry`](https://github.com/woocommerce/woocommerce-gutenberg-products-block/blob/trunk/src/Integrations/IntegrationRegistry.php) to the callback.
 
 You may then use the `register` method on this object to register your `IntegrationInterface`.
 
@@ -55,7 +63,7 @@ The keys and values of this array should all be serializable.
 
 ## Usage example
 
-Let's suppose we're the author of an extension: `WooCommerce Example Plugin`. We want to enqueue scripts, styles, and data on the frontend when either the Mini Cart, Cart or Checkout blocks are being used.
+Let's suppose we're the author of an extension: `WooCommerce Example Plugin`. We want to enqueue scripts, styles, and data on the frontend when either the Mini-Cart, Cart or Checkout blocks are being used.
 
 We also want some data from a server-side function to be available to our front-end scripts.
 
@@ -171,7 +179,7 @@ class WooCommerce_Example_Plugin_Integration implements IntegrationInterface {
 }
 ```
 
-As mentioned, we will need register our `IntegrationInterface` with WooCommerce Blocks, as we want our scripts to be included when either the Mini Cart, Cart or Checkout is used, we need to register callbacks for two actions.
+As mentioned, we will need register our `IntegrationInterface` with WooCommerce Blocks, as we want our scripts to be included when either the Mini-Cart, Cart or Checkout is used, we need to register callbacks for three actions.
 
 ```php
 add_action(

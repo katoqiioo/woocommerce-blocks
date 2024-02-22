@@ -20,16 +20,18 @@ export const renderNoProductsPlaceholder = ( blockTitle, blockIcon ) => (
 		</p>
 		<Button
 			className="wc-block-products__add-product-button"
-			isSecondary
+			variant="secondary"
 			href={ ADMIN_URL + 'post-new.php?post_type=product' }
+			target="_top"
 		>
 			{ __( 'Add new product', 'woo-gutenberg-products-block' ) + ' ' }
 			<Icon icon={ external } />
 		</Button>
 		<Button
 			className="wc-block-products__read_more_button"
-			isTertiary
+			variant="tertiary"
 			href="https://docs.woocommerce.com/document/managing-products/"
+			target="_blank"
 		>
 			{ __( 'Learn more', 'woo-gutenberg-products-block' ) }
 		</Button>

@@ -1,3 +1,11 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # Filter Registry <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
@@ -47,7 +55,7 @@ type CheckoutFilterFunction = < T >(
 import { registerCheckoutFilters } from '@woocommerce/blocks-checkout';
 
 // Global import
- const { registerCheckoutFilters } = wc.blocksCheckout;
+const { registerCheckoutFilters } = wc.blocksCheckout;
 
 const callback = ( value ) => {
 	return value;
@@ -85,7 +93,7 @@ This function applies a filter, and all registered callbacks, to a given value.
 import { applyCheckoutFilter } from '@woocommerce/blocks-checkout';
 
 // Global import
- const { applyCheckoutFilter } = wc.blocksCheckout;
+const { applyCheckoutFilter } = wc.blocksCheckout;
 
 const options = {
 	filterName: 'my-filter',
@@ -121,7 +129,7 @@ A function that needs to return true when the filtered value is passed in order 
 
 ## Available Filters
 
-Filters are implemented throughout the Mini Cart, Cart and Checkout Blocks, as well as some components. For a list of filters, [see this document](../../../docs/third-party-developers/extensibility/checkout-block/available-filters.md). You can also search for [usage of `applyCheckoutFilter` within the source code](https://github.com/woocommerce/woocommerce-gutenberg-products-block/search?q=applyCheckoutFilter).
+Filters are implemented throughout the Mini-Cart, Cart and Checkout Blocks, as well as some components. For a list of filters, [see this document](../../../docs/third-party-developers/extensibility/checkout-block/available-filters.md). You can also search for [usage of `applyCheckoutFilter` within the source code](https://github.com/woocommerce/woocommerce-gutenberg-products-block/search?q=applyCheckoutFilter).
 
 <!-- FEEDBACK -->
 

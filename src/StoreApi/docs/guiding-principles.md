@@ -1,15 +1,23 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # Store API Guiding principles <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
 
-- [Routes must include a well-defined JSON schema](#routes-must-include-a-well-defined-json-schema)
-- [Routes should be designed around resources with a single type of schema](#routes-should-be-designed-around-resources-with-a-single-type-of-schema)
-    - [Error Handling](#error-handling)
-    - [Cart Operations](#cart-operations)
-- [Exposed data must belong to the current user or be non-sensitive](#exposed-data-must-belong-to-the-current-user-or-be-non-sensitive)
-- [Collections of resources should be paginated](#collections-of-resources-should-be-paginated)
-- [API Responses should use standard HTTP status codes](#api-responses-should-use-standard-http-status-codes)
-- [Breaking changes should be avoided where possible](#breaking-changes-should-be-avoided-where-possible)
+-   [Routes must include a well-defined JSON schema](#routes-must-include-a-well-defined-json-schema)
+-   [Routes should be designed around resources with a single type of schema](#routes-should-be-designed-around-resources-with-a-single-type-of-schema)
+    -   [Error Handling](#error-handling)
+    -   [Cart Operations](#cart-operations)
+-   [Exposed data must belong to the current user or be non-sensitive](#exposed-data-must-belong-to-the-current-user-or-be-non-sensitive)
+-   [Collections of resources should be paginated](#collections-of-resources-should-be-paginated)
+-   [API Responses should use standard HTTP status codes](#api-responses-should-use-standard-http-status-codes)
+-   [Breaking changes should be avoided where possible](#breaking-changes-should-be-avoided-where-possible)
 
 The following principles should be considered when extending, creating, or updating endpoints in the Store API.
 

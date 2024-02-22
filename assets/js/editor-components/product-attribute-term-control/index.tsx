@@ -13,7 +13,7 @@ import useProductAttributes from '@woocommerce/base-context/hooks/use-product-at
 import ErrorMessage from '@woocommerce/editor-components/error-placeholder/error-message';
 import ExpandableSearchListItem from '@woocommerce/editor-components/expandable-search-list-item/expandable-search-list-item';
 import {
-	renderItemArgs,
+	RenderItemArgs,
 	SearchListControlProps,
 	SearchListItem as SearchListItemProps,
 } from '@woocommerce/editor-components/search-list-control/types';
@@ -54,8 +54,9 @@ const ProductAttributeTermControl = ( {
 	const { errorLoadingAttributes, isLoadingAttributes, productsAttributes } =
 		useProductAttributes( true );
 
-	const renderItem = ( args: renderItemArgs ) => {
+	const renderItem = ( args: RenderItemArgs ) => {
 		const { item, search, depth = 0 } = args;
+		const count = item.count || 0;
 		const classes = [
 			'woocommerce-product-attributes__item',
 			'woocommerce-search-list__item',
@@ -79,21 +80,21 @@ const ProductAttributeTermControl = ( {
 						_n(
 							'%d term',
 							'%d terms',
-							item.count,
+							count,
 							'woo-gutenberg-products-block'
 						),
-						item.count
+						count
 					) }
 					aria-label={ sprintf(
 						/* translators: %1$s is the item name, %2$d is the count of terms for the item. */
 						_n(
 							'%1$s, has %2$d term',
 							'%1$s, has %2$d terms',
-							item.count,
+							count,
 							'woo-gutenberg-products-block'
 						),
 						item.name,
-						item.count
+						count
 					) }
 				/>
 			);
@@ -111,21 +112,21 @@ const ProductAttributeTermControl = ( {
 					_n(
 						'%d product',
 						'%d products',
-						item.count,
+						count,
 						'woo-gutenberg-products-block'
 					),
-					item.count
+					count
 				) }
 				aria-label={ sprintf(
 					/* translators: %1$s is the attribute name, %2$d is the count of products for that attribute. */
 					_n(
 						'%1$s, has %2$d product',
 						'%1$s, has %2$d products',
-						item.count,
+						count,
 						'woo-gutenberg-products-block'
 					),
 					itemName,
-					item.count
+					count
 				) }
 			/>
 		);

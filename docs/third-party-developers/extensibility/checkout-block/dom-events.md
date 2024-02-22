@@ -1,3 +1,11 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # DOM Events <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
@@ -9,7 +17,7 @@
         -   [`detail` parameters:](#detail-parameters)
     -   [`wc-blocks_removed_from_cart`](#wc-blocks_removed_from_cart)
 
-Some blocks need to react to certain events in order to display the most up to date data or behave in a certain way. That's the case of the Cart block, for example, that must listen to 'add to cart' events in order to update the cart contents; or the Mini Cart block, that gets opened every time a product is added to the cart.
+Some blocks need to react to certain events in order to display the most up to date data or behave in a certain way. That's the case of the Cart block, for example, that must listen to 'add to cart' events in order to update the cart contents; or the Mini-Cart block, that gets opened every time a product is added to the cart.
 
 ## WooCommerce core events in WooCommerce Blocks
 
@@ -21,13 +29,13 @@ WooCommerce core uses jQuery events to trigger and listen to certain events, lik
 
 This event is the equivalent to the jQuery event `adding_to_cart` triggered by WooCommerce core. It indicates that the process of adding a product to the cart was sent to the server, but there is still no indication on whether the product was successfully added or not.
 
-_Example usage in WC Blocks:_ Mini Cart block listens to this event to append its dependencies.
+_Example usage in WC Blocks:_ Mini-Cart block listens to this event to append its dependencies.
 
 ### `wc-blocks_added_to_cart`
 
 This event is the equivalent to the jQuery event `added_to_cart` triggered by WooCommerce core. It indicates that the process of adding a product to the cart has finished with success.
 
-_Example usage in WC Blocks:_ Cart and Mini Cart blocks (via the `useStoreCart()` hook) listen to this event to know if they need to update their contents.
+_Example usage in WC Blocks:_ Cart and Mini-Cart blocks (via the `useStoreCart()` hook) listen to this event to know if they need to update their contents.
 
 #### `detail` parameters
 
@@ -39,7 +47,7 @@ _Example usage in WC Blocks:_ Cart and Mini Cart blocks (via the `useStoreCart()
 
 This event is the equivalent to the jQuery event `removed_from_cart` triggered by WooCommerce core. It indicates that a product has been removed from the cart.
 
-_Example usage in WC Blocks:_ Cart and Mini Cart blocks (via the `useStoreCart()` hook) listen to this event to know if they need to update their contents.
+_Example usage in WC Blocks:_ Cart and Mini-Cart blocks (via the `useStoreCart()` hook) listen to this event to know if they need to update their contents.
 
 <!-- FEEDBACK -->
 

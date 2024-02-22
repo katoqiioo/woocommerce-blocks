@@ -1,13 +1,21 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # Nonce Tokens <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
 
-- [Store API Endpoints that Require Nonces](#store-api-endpoints-that-require-nonces)
-- [Sending Nonce Tokens with requests](#sending-nonce-tokens-with-requests)
-- [Generating security nonces from WordPress](#generating-security-nonces-from-wordpress)
-- [Disabling Nonces for Development](#disabling-nonces-for-development)
+-   [Store API Endpoints that Require Nonces](#store-api-endpoints-that-require-nonces)
+-   [Sending Nonce Tokens with requests](#sending-nonce-tokens-with-requests)
+-   [Generating security nonces from WordPress](#generating-security-nonces-from-wordpress)
+-   [Disabling Nonces for Development](#disabling-nonces-for-development)
 
-Nonces are generated numbers used to verify origin and intent of requests for security purposes. You can read more about [nonces in the WordPress codex](https://developer.wordpress.org/plugins/security/nonces/).
+Nonces are generated numbers used to verify origin and intent of requests for security purposes. You can read more about [nonces in the WordPress codex](https://developer.wordpress.org/apis/security/nonces/).
 
 ## Store API Endpoints that Require Nonces
 

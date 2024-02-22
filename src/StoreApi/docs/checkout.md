@@ -1,16 +1,24 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # Checkout API <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
 
-- [Get Checkout Data](#get-checkout-data)
-- [Process Order and Payment](#process-order-and-payment)
+-   [Get Checkout Data](#get-checkout-data)
+-   [Process Order and Payment](#process-order-and-payment)
 
 The checkout API facilitates the creation of orders (from the current cart) and handling payments for payment methods.
 
 All checkout endpoints require [Nonce Tokens](nonce-tokens.md).
 
-- [Get Checkout Data](#get-checkout-data)
-- [Process Order and Payment](#process-order-and-payment)
+-   [Get Checkout Data](#get-checkout-data)
+-   [Process Order and Payment](#process-order-and-payment)
 
 ## Get Checkout Data
 
@@ -121,15 +129,15 @@ curl --header "Nonce: 12345" --request POST https://example-store.com/wp-json/wc
 		"postcode": "10023",
 		"country": "US"
 	},
-  "customer_note": "Test notes on order.",
-  "create_account": false,
-  "payment_method": "cheque",
-  "payment_data": [],
-  "extensions": {
-    "some-extension-name": {
-      "some-data-key": "some data value"
-    }
-  }
+	"customer_note": "Test notes on order.",
+	"create_account": false,
+	"payment_method": "cheque",
+	"payment_data": [],
+	"extensions": {
+		"some-extension-name": {
+			"some-data-key": "some data value"
+		}
+	}
 }
 ```
 
@@ -185,36 +193,36 @@ For further information on generating a `stripe_source` please check [the Stripe
 
 ```json
 {
-  "payment_data": [
-    {
-      "key": "stripe_source",
-      "value": "src_xxxxxxxxxxxxx"
-    },
-    {
-      "key": "billing_email",
-      "value": "myemail@email.com"
-    },
-    {
-      "key": "billing_first_name",
-      "value": "Jane"
-    },
-    {
-      "key": "billing_last_name",
-      "value": "Doe"
-    },
-    {
-      "key": "paymentMethod",
-      "value": "stripe"
-    },
-    {
-      "key": "paymentRequestType",
-      "value": "cc"
-    },
-    {
-      "key": "wc-stripe-new-payment-method",
-      "value": true
-    }
-  ]
+	"payment_data": [
+		{
+			"key": "stripe_source",
+			"value": "src_xxxxxxxxxxxxx"
+		},
+		{
+			"key": "billing_email",
+			"value": "myemail@email.com"
+		},
+		{
+			"key": "billing_first_name",
+			"value": "Jane"
+		},
+		{
+			"key": "billing_last_name",
+			"value": "Doe"
+		},
+		{
+			"key": "paymentMethod",
+			"value": "stripe"
+		},
+		{
+			"key": "paymentRequestType",
+			"value": "cc"
+		},
+		{
+			"key": "wc-stripe-new-payment-method",
+			"value": true
+		}
+	]
 }
 ```
 

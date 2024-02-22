@@ -2,6 +2,7 @@
 namespace Automattic\WooCommerce\Blocks\Domain\Services;
 
 use Automattic\WooCommerce\Blocks\Domain\Package;
+use Automattic\WooCommerce\Blocks\Utils\CartCheckoutUtils;
 
 /**
  * Service class for adding new-style Notices to WooCommerce core.
@@ -37,31 +38,12 @@ class Notices {
 	}
 
 	/**
-	 * Set all hooks related to adding Checkout Draft order functionality to Woo Core. This is only enabled if the user
-	 * is using the new block based cart/checkout.
+	 * Initialize notice hooks.
 	 */
 	public function init() {
-		// Core page IDs.
-		$cart_page_id     = wc_get_page_id( 'cart' );
-		$checkout_page_id = wc_get_page_id( 'checkout' );
-
-		// Checks a specific page (by ID) to see if it contains the named block.
-		$has_block_cart     = $cart_page_id && has_block( 'woocommerce/cart', $cart_page_id );
-		$has_block_checkout = $checkout_page_id && has_block( 'woocommerce/checkout', $checkout_page_id );
-
-		if ( $has_block_cart || $has_block_checkout ) {
-			add_filter( 'woocommerce_kses_notice_allowed_tags', [ $this, 'add_kses_notice_allowed_tags' ] );
-			add_filter( 'wc_get_template', [ $this, 'get_notices_template' ], 10, 5 );
-			add_action(
-				'wp_head',
-				function() {
-					// These pages may return notices in ajax responses, so we need the styles to be ready.
-					if ( is_cart() || is_checkout() ) {
-						wp_enqueue_style( 'wc-blocks-style' );
-					}
-				}
-			);
-		}
+		add_filter( 'woocommerce_kses_notice_allowed_tags', [ $this, 'add_kses_notice_allowed_tags' ] );
+		add_filter( 'wc_get_template', [ $this, 'get_notices_template' ], 10, 5 );
+		add_action( 'wp_head', [ $this, 'enqueue_notice_styles' ] );
 	}
 
 	/**
@@ -107,5 +89,14 @@ class Notices {
 			wp_enqueue_style( 'wc-blocks-style' );
 		}
 		return $template;
+	}
+
+	/**
+	 * Replaces all notices with the new block based notices.
+	 *
+	 * @return void
+	 */
+	public function enqueue_notice_styles() {
+		wp_enqueue_style( 'wc-blocks-style' );
 	}
 }

@@ -12,7 +12,7 @@ import { pressKeyWithModifier } from '@wordpress/e2e-test-utils';
 /**
  * Internal dependencies
  */
-import { BASE_URL } from '../e2e/utils';
+import { BASE_URL } from '../e2e-jest/utils';
 import {
 	getCartItemPathExpression,
 	getQtyInputPathExpression,
@@ -81,7 +81,7 @@ const checkCustomerPushCompleted = async (
 			);
 		} );
 	} );
-	await page.waitForTimeout( 1500 );
+	await page.waitForTimeout( 2000 );
 };
 
 export const shopper = {
@@ -91,7 +91,7 @@ export const shopper = {
 	// This is important as we might one day merge this into core WC.
 	block: {
 		// All block pages have a title composed of the block name followed by "Block".
-		// E.g. "Checkout Block or Mini Cart Block". The permalinks are generated from
+		// E.g. "Checkout Block or Mini-Cart Block". The permalinks are generated from
 		// the page title so we can derive them directly
 		goToBlockPage: async ( blockName ) => {
 			const pageTitle = `${ blockName } Block`;
@@ -171,11 +171,10 @@ export const shopper = {
 				await uiUnblocked();
 			}
 
-			await page.waitForSelector( '.woocommerce-info' );
-			// eslint-disable-next-line jest/no-standalone-expect
-			await expect( page ).toMatchElement(
-				'.woocommerce-info.cart-empty'
-			);
+			// Wait for form to be hidden.
+			await page.waitForSelector( '.woocommerce-cart-form', {
+				hidden: true,
+			} );
 		},
 
 		placeOrder: async () => {

@@ -134,8 +134,9 @@ export default function ( {
 			</p>
 			<Button
 				className="wc-block-price-slider__add-product-button"
-				isSecondary
+				variant="secondary"
 				href={ getAdminLink( 'post-new.php?post_type=product' ) }
+				target="_top"
 			>
 				{ __( 'Add new product', 'woo-gutenberg-products-block' ) +
 					' ' }
@@ -143,8 +144,9 @@ export default function ( {
 			</Button>
 			<Button
 				className="wc-block-price-slider__read_more_button"
-				isTertiary
+				variant="tertiary"
 				href="https://docs.woocommerce.com/document/managing-products/"
+				target="_blank"
 			>
 				{ __( 'Learn more', 'woo-gutenberg-products-block' ) }
 			</Button>

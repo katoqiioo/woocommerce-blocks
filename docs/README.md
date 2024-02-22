@@ -1,3 +1,11 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # WooCommerce Blocks Handbook <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
@@ -17,14 +25,14 @@ The WooCommerce Blocks Handbook provides documentation for designers and develop
 
 > Want to contribute to the WooCommerce Blocks plugin? The following documents offer information that can help you get started.
 
--   [Contributing](contributors/contributing/README.md)
-    -   [Getting Started](contributors/contributing/getting-started.md)
-    -   [Coding Guidelines](contributors/contributing/coding-guidelines.md)
-    -   [Block Script Assets](contributors/contributing/block-assets.md)
-    -   [CSS Build System](contributors/contributing/css-build-system.md)
-    -   [JavaScript Build System](contributors/contributing/javascript-build-system.md)
-    -   [JavaScript Testing](contributors/contributing/javascript-testing.md)
-    -   [Storybook & Components](contributors/contributing/storybook-and-components.md)
+-   [Contributing](contributors/README.md)
+    -   [Getting Started](contributors/getting-started.md)
+    -   [Coding Guidelines](contributors/coding-guidelines.md)
+    -   [Block Script Assets](contributors/block-assets.md)
+    -   [CSS Build System](contributors/css-build-system.md)
+    -   [JavaScript Build System](contributors/javascript-build-system.md)
+    -   [JavaScript Testing](contributors/javascript-testing.md)
+    -   [Storybook & Components](contributors/storybook-and-components.md)
 
 ## Internal developers
 
@@ -87,7 +95,7 @@ The WooCommerce Blocks Handbook provides documentation for designers and develop
     -   REST API
         -   [Exposing your data in the Store API](third-party-developers/extensibility/rest-api/extend-rest-api-add-data.md)
         -   [Available endpoints to extend with ExtendSchema](third-party-developers/extensibility/rest-api/available-endpoints-to-extend.md)
-        -   [Adding an endpoint to ExtendSchema](third-party-developers/extensibility/rest-api/extend-rest-api-new-endpoint.md)
+        -   [Adding an endpoint to ExtendSchema](internal-developers/rest-api/extend-rest-api-new-endpoint.md)
         -   [Available Formatters](third-party-developers/extensibility/rest-api/extend-rest-api-formatters.md)
         -   [Updating the cart with the Store API](third-party-developers/extensibility/rest-api/extend-rest-api-update-cart.md)
     -   Checkout Payment Methods
@@ -111,7 +119,7 @@ The WooCommerce Blocks Handbook provides documentation for designers and develop
 > Are you a designer? The following documents explain how to apply design-changes to the WooCommerce Blocks plugin.
 
 -   [Theming](designers/theming/README.md)
-    -   [All Products & filters](designers/theming/all-products-and-filters.md)
+    -   [Filter blocks](designers/theming/filter-blocks.md)
     -   [Cart and Checkout](designers/theming/cart-and-checkout.md)
     -   [Class names update in 4.6.0](designers/theming/class-names-update-460.md)
     -   [Class names update in 3.4.0](designers/theming/class-names-update-340.md)
@@ -138,6 +146,7 @@ The following posts from [developer.woocommerce.com](https://developer.woocommer
 
 The following tutorials from [developer.woocommerce.com](https://developer.woocommerce.com/category/tutorials/) help you with extending the WooCommerce Blocks plugin.
 
+-   [📺 Tutorial: Extending the WooCommerce Checkout Block](https://developer.woocommerce.com/2023/08/07/extending-the-woocommerce-checkout-block-to-add-custom-shipping-options/)
 -   [Hiding Shipping and Payment Options in the Cart and Checkout Blocks](https://developer.woocommerce.com/2022/05/20/hiding-shipping-and-payment-options-in-the-cart-and-checkout-blocks/)
 -   [Integrating your Payment Method with Cart and Checkout Blocks](https://developer.woocommerce.com/2021/03/15/integrating-your-payment-method-with-cart-and-checkout-blocks/)
 -   [Exposing Payment Options in the Checkout Block](https://developer.woocommerce.com/2022/07/07/exposing-payment-options-in-the-checkout-block/)

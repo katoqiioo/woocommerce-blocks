@@ -3,20 +3,17 @@
  */
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { InnerBlockTemplate } from '@wordpress/blocks';
-import { useSelect } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
 import './editor.scss';
+import { useIsDescendentOfSingleProductTemplate } from '../shared/use-is-descendent-of-single-product-template';
 
 const Edit = () => {
-	const isDescendentOfSingleProductTemplate = useSelect( ( select ) => {
-		const store = select( 'core/edit-site' );
-		const postId = store?.getEditedPostId< string | undefined >();
-
-		return postId?.includes( '//single-product' );
-	}, [] );
+	const isDescendentOfSingleProductTemplate =
+		useIsDescendentOfSingleProductTemplate();
 
 	const TEMPLATE: InnerBlockTemplate[] = [
 		[
@@ -32,14 +29,17 @@ const Edit = () => {
 				[
 					'core/post-terms',
 					{
-						prefix: 'Category: ',
+						prefix: __(
+							'Category: ',
+							'woo-gutenberg-products-block'
+						),
 						term: 'product_cat',
 					},
 				],
 				[
 					'core/post-terms',
 					{
-						prefix: 'Tags: ',
+						prefix: __( 'Tags: ', 'woo-gutenberg-products-block' ),
 						term: 'product_tag',
 					},
 				],

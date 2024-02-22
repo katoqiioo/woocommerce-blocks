@@ -1,3 +1,11 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # Testing
 
 ## Payments
@@ -46,7 +54,7 @@ Go to: [https://github.com/woocommerce/woocommerce-gateway-stripe/blob/8ffd22aff
 
 ### Interaction with unusable payment methods
 
--   Install and activate [WooCommerce Bookings](https://github.com/woocommerce/woocommerce-bookings). Add a bookable product, ensure to add a cost to it on the edit product page, then:
+-   Install and activate [WooCommerce Bookings](https://woocommerce.com/products/woocommerce-bookings/). Add a bookable product, ensure to add a cost to it on the edit product page, then:
 -   Add a _normal_ (i.e. Beanie, Hoodie etc.) product to the cart and ensure you can check out successfully.
 -   Then add a bookable product, ensure you can check out successfully.
 
@@ -86,7 +94,7 @@ usePaymentProcessing(
 	emitResponse,
 	sourceId,
 	setSourceId,
-	onPaymentProcessing,
+	onPaymentSetup,
 	eventRegistration
 );
 ```
@@ -102,7 +110,7 @@ export const usePaymentProcessing = (
   emitResponse,
   sourceId,
   setSourceId,
-  onPaymentProcessing,
+  onPaymentSetup,
   eventRegistration
 ) => {
 ...

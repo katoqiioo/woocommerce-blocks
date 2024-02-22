@@ -40,11 +40,11 @@ export interface ErrorPlaceholderProps {
 	/**
 	 * Callback to retry an action.
 	 */
-	onRetry?: () => void;
+	onRetry?: ( () => void ) | undefined;
 }
 
 const ErrorPlaceholder = ( {
-	className,
+	className = '',
 	error,
 	isLoading = false,
 	onRetry,
@@ -63,7 +63,7 @@ const ErrorPlaceholder = ( {
 				{ isLoading ? (
 					<Spinner />
 				) : (
-					<Button isSecondary onClick={ onRetry }>
+					<Button variant="secondary" onClick={ onRetry }>
 						{ __( 'Retry', 'woo-gutenberg-products-block' ) }
 					</Button>
 				) }

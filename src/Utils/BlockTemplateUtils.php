@@ -1,11 +1,15 @@
 <?php
 namespace Automattic\WooCommerce\Blocks\Utils;
 
-use Automattic\WooCommerce\Blocks\Templates\ProductAttributeTemplate;
-use Automattic\WooCommerce\Blocks\Templates\ProductSearchResultsTemplate;
 use Automattic\WooCommerce\Blocks\Domain\Services\FeatureGating;
 use Automattic\WooCommerce\Blocks\Options;
+use Automattic\WooCommerce\Blocks\Templates\CartTemplate;
+use Automattic\WooCommerce\Blocks\Templates\CheckoutHeaderTemplate;
+use Automattic\WooCommerce\Blocks\Templates\CheckoutTemplate;
 use Automattic\WooCommerce\Blocks\Templates\MiniCartTemplate;
+use Automattic\WooCommerce\Blocks\Templates\OrderConfirmationTemplate;
+use Automattic\WooCommerce\Blocks\Templates\ProductAttributeTemplate;
+use Automattic\WooCommerce\Blocks\Templates\ProductSearchResultsTemplate;
 
 /**
  * Utility methods used for serving block templates from WooCommerce Blocks.
@@ -33,6 +37,8 @@ class BlockTemplateUtils {
 		'TEMPLATES'                 => 'templates',
 		'TEMPLATE_PARTS'            => 'parts',
 	);
+
+	const TEMPLATES_ROOT_DIR = 'templates';
 
 	/**
 	 * WooCommerce plugin slug
@@ -177,7 +183,8 @@ class BlockTemplateUtils {
 
 	/**
 	 * Build a unified template object based on a theme file.
-	 * Important: This method is an almost identical duplicate from wp-includes/block-template-utils.php as it was not intended for public use. It has been modified to build templates from plugins rather than themes.
+	 *
+	 * @internal Important: This method is an almost identical duplicate from wp-includes/block-template-utils.php as it was not intended for public use. It has been modified to build templates from plugins rather than themes.
 	 *
 	 * @param array|object $template_file Theme file.
 	 * @param string       $template_type wp_template or wp_template_part.
@@ -215,6 +222,19 @@ class BlockTemplateUtils {
 		$template->is_custom      = false; // Templates loaded from the filesystem aren't custom, ones that have been edited and loaded from the DB are.
 		$template->post_types     = array(); // Don't appear in any Edit Post template selector dropdown.
 		$template->area           = 'uncategorized';
+
+		// Force the Mini-Cart template part to be in the Mini-Cart template part area.
+		// @todo When this class is refactored, move title, description, and area definition to the template classes (CheckoutHeaderTemplate, MiniCartTemplate, etc).
+		if ( 'wp_template_part' === $template_type ) {
+			switch ( $template_file->slug ) {
+				case 'mini-cart':
+					$template->area = 'mini-cart';
+					break;
+				case 'checkout-header':
+					$template->area = 'header';
+					break;
+			}
+		}
 		return $template;
 	}
 
@@ -266,6 +286,29 @@ class BlockTemplateUtils {
 	}
 
 	/**
+	 * Gets the directory where templates of a specific template type can be found.
+	 *
+	 * @param string $template_type wp_template or wp_template_part.
+	 *
+	 * @return string
+	 */
+	public static function get_templates_directory( $template_type = 'wp_template' ) {
+			$root_path                = dirname( __DIR__, 2 ) . '/' . self::TEMPLATES_ROOT_DIR . DIRECTORY_SEPARATOR;
+			$templates_directory      = $root_path . self::DIRECTORY_NAMES['TEMPLATES'];
+			$template_parts_directory = $root_path . self::DIRECTORY_NAMES['TEMPLATE_PARTS'];
+
+		if ( 'wp_template_part' === $template_type ) {
+			return $template_parts_directory;
+		}
+
+		if ( self::should_use_blockified_product_grid_templates() ) {
+			return $templates_directory . '/blockified';
+		}
+
+		return $templates_directory;
+	}
+
+	/**
 	 * Returns template titles.
 	 *
 	 * @param string $template_slug The templates slug (e.g. single-product).
@@ -302,38 +345,52 @@ class BlockTemplateUtils {
 	 * @return array The plugin template types.
 	 */
 	public static function get_plugin_block_template_types() {
-		$plugin_template_types = array(
-			'single-product'                   => array(
+		return array(
+			'single-product'                      => array(
 				'title'       => _x( 'Single Product', 'Template name', 'woo-gutenberg-products-block' ),
 				'description' => __( 'Displays a single product.', 'woo-gutenberg-products-block' ),
 			),
-			'archive-product'                  => array(
+			'archive-product'                     => array(
 				'title'       => _x( 'Product Catalog', 'Template name', 'woo-gutenberg-products-block' ),
 				'description' => __( 'Displays your products.', 'woo-gutenberg-products-block' ),
 			),
-			'taxonomy-product_cat'             => array(
+			'taxonomy-product_cat'                => array(
 				'title'       => _x( 'Products by Category', 'Template name', 'woo-gutenberg-products-block' ),
 				'description' => __( 'Displays products filtered by a category.', 'woo-gutenberg-products-block' ),
 			),
-			'taxonomy-product_tag'             => array(
+			'taxonomy-product_tag'                => array(
 				'title'       => _x( 'Products by Tag', 'Template name', 'woo-gutenberg-products-block' ),
 				'description' => __( 'Displays products filtered by a tag.', 'woo-gutenberg-products-block' ),
 			),
-			ProductAttributeTemplate::SLUG     => array(
+			ProductAttributeTemplate::SLUG        => array(
 				'title'       => _x( 'Products by Attribute', 'Template name', 'woo-gutenberg-products-block' ),
 				'description' => __( 'Displays products filtered by an attribute.', 'woo-gutenberg-products-block' ),
 			),
-			ProductSearchResultsTemplate::SLUG => array(
+			ProductSearchResultsTemplate::SLUG    => array(
 				'title'       => _x( 'Product Search Results', 'Template name', 'woo-gutenberg-products-block' ),
 				'description' => __( 'Displays search results for your store.', 'woo-gutenberg-products-block' ),
 			),
-			MiniCartTemplate::SLUG             => array(
-				'title'       => _x( 'Mini Cart', 'Template name', 'woo-gutenberg-products-block' ),
-				'description' => __( 'Template used to display the Mini Cart drawer.', 'woo-gutenberg-products-block' ),
+			MiniCartTemplate::SLUG                => array(
+				'title'       => _x( 'Mini-Cart', 'Template name', 'woo-gutenberg-products-block' ),
+				'description' => __( 'Template used to display the Mini-Cart drawer.', 'woo-gutenberg-products-block' ),
+			),
+			CartTemplate::get_slug()              => array(
+				'title'       => _x( 'Page: Cart', 'Template name', 'woo-gutenberg-products-block' ),
+				'description' => __( 'The Cart template displays the items selected by the user for purchase, including quantities, prices, and discounts. It allows users to review their choices before proceeding to checkout.', 'woo-gutenberg-products-block' ),
+			),
+			CheckoutTemplate::get_slug()          => array(
+				'title'       => _x( 'Page: Checkout', 'Template name', 'woo-gutenberg-products-block' ),
+				'description' => __( 'The Checkout template guides users through the final steps of the purchase process. It enables users to enter shipping and billing information, select a payment method, and review order details.', 'woo-gutenberg-products-block' ),
+			),
+			CheckoutHeaderTemplate::SLUG          => array(
+				'title'       => _x( 'Checkout Header', 'Template name', 'woo-gutenberg-products-block' ),
+				'description' => __( 'Template used to display the simplified Checkout header.', 'woo-gutenberg-products-block' ),
+			),
+			OrderConfirmationTemplate::get_slug() => array(
+				'title'       => _x( 'Order Confirmation', 'Template name', 'woo-gutenberg-products-block' ),
+				'description' => __( 'The Order Confirmation template serves as a receipt and confirmation of a successful purchase. It includes a summary of the ordered items, shipping, billing, and totals.', 'woo-gutenberg-products-block' ),
 			),
 		);
-
-		return $plugin_template_types;
 	}
 
 	/**
@@ -422,25 +479,25 @@ class BlockTemplateUtils {
 	/**
 	 * Checks to see if they are using a compatible version of WP, or if not they have a compatible version of the Gutenberg plugin installed.
 	 *
+	 * @param string $template_type Optional. Template type: `wp_template` or `wp_template_part`.
+	 *                              Default `wp_template`.
 	 * @return boolean
 	 */
-	public static function supports_block_templates() {
-		if (
-			! wc_current_theme_is_fse_theme() &&
-			( ! function_exists( 'gutenberg_supports_block_templates' ) || ! gutenberg_supports_block_templates() )
-		) {
-			return false;
+	public static function supports_block_templates( $template_type = 'wp_template' ) {
+		if ( 'wp_template_part' === $template_type && ( wc_current_theme_is_fse_theme() || current_theme_supports( 'block-template-parts' ) ) ) {
+			return true;
+		} elseif ( 'wp_template' === $template_type && wc_current_theme_is_fse_theme() ) {
+			return true;
 		}
-
-		return true;
+		return false;
 	}
 
 	/**
 	 * Retrieves a single unified template object using its id.
 	 *
 	 * @param string $id            Template unique identifier (example: theme_slug//template_slug).
-	 * @param string $template_type Optional. Template type: `'wp_template'` or '`wp_template_part'`.
-	 *                             Default `'wp_template'`.
+	 * @param string $template_type Optional. Template type: `wp_template` or 'wp_template_part`.
+	 *                              Default `wp_template`.
 	 *
 	 * @return WP_Block_Template|null Template.
 	 */
@@ -711,5 +768,29 @@ class BlockTemplateUtils {
 			},
 			$saved_woo_templates
 		);
+	}
+
+	/**
+	 * Gets the template part by slug
+	 *
+	 * @param string $slug The template part slug.
+	 *
+	 * @return string The template part content.
+	 */
+	public static function get_template_part( $slug ) {
+		$templates_from_db = self::get_block_templates_from_db( array( $slug ), 'wp_template_part' );
+		if ( count( $templates_from_db ) > 0 ) {
+			$template_slug_to_load = $templates_from_db[0]->theme;
+		} else {
+			$theme_has_template    = self::theme_has_template_part( $slug );
+			$template_slug_to_load = $theme_has_template ? get_stylesheet() : self::PLUGIN_SLUG;
+		}
+		$template_part = self::get_block_template( $template_slug_to_load . '//' . $slug, 'wp_template_part' );
+
+		if ( $template_part && ! empty( $template_part->content ) ) {
+			return $template_part->content;
+		}
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		return file_get_contents( self::get_templates_directory( 'wp_template_part' ) . DIRECTORY_SEPARATOR . $slug . '.html' );
 	}
 }

@@ -38,36 +38,110 @@ const blocks = {
 	'legacy-template': {
 		customDir: 'classic-template',
 	},
+	'classic-shortcode': {},
 	'mini-cart': {},
 	'mini-cart-contents': {
 		customDir: 'mini-cart/mini-cart-contents',
 	},
 	'store-notices': {},
+	'page-content-wrapper': {},
 	'price-filter': {},
 	'product-best-sellers': {},
 	'product-category': {},
 	'product-categories': {},
-	'product-new': {},
-	'product-on-sale': {},
-	'product-query': {
+	'product-collection': {},
+	'product-collection-no-results': {
+		customDir: 'product-collection/inner-blocks/no-results',
+	},
+	'product-gallery': {
 		isExperimental: true,
 	},
+	'product-gallery-large-image': {
+		customDir: 'product-gallery/inner-blocks/product-gallery-large-image',
+		isExperimental: true,
+	},
+	'product-gallery-large-image-next-previous': {
+		customDir:
+			'product-gallery/inner-blocks/product-gallery-large-image-next-previous',
+		isExperimental: true,
+	},
+	'product-gallery-pager': {
+		customDir: 'product-gallery/inner-blocks/product-gallery-pager',
+		isExperimental: true,
+	},
+	'product-gallery-thumbnails': {
+		customDir: 'product-gallery/inner-blocks/product-gallery-thumbnails',
+		isExperimental: true,
+	},
+	'product-new': {},
+	'product-on-sale': {},
+	'product-query': {},
 	'product-results-count': {},
 	'product-search': {},
 	'product-tag': {},
+	'product-template': {},
 	'product-top-rated': {},
 	'products-by-attribute': {},
 	'rating-filter': {},
+	'product-average-rating': {},
+	'product-rating-stars': {},
+	'product-rating-counter': {},
 	'reviews-by-category': {
 		customDir: 'reviews/reviews-by-category',
 	},
 	'reviews-by-product': {
 		customDir: 'reviews/reviews-by-product',
 	},
-	'single-product': {
+	'single-product': {},
+	'stock-filter': {},
+	'collection-filters': {
 		isExperimental: true,
 	},
-	'stock-filter': {},
+	'collection-stock-filter': {
+		isExperimental: true,
+		customDir: 'collection-filters/inner-blocks/stock-filter',
+	},
+	'collection-price-filter': {
+		customDir: 'collection-filters/inner-blocks/price-filter',
+		isExperimental: true,
+	},
+	'collection-attribute-filter': {
+		customDir: 'collection-filters/inner-blocks/attribute-filter',
+		isExperimental: true,
+	},
+	'order-confirmation-summary': {
+		customDir: 'order-confirmation/summary',
+	},
+	'order-confirmation-totals-wrapper': {
+		customDir: 'order-confirmation/totals-wrapper',
+	},
+	'order-confirmation-totals': {
+		customDir: 'order-confirmation/totals',
+	},
+	'order-confirmation-downloads-wrapper': {
+		customDir: 'order-confirmation/downloads-wrapper',
+	},
+	'order-confirmation-downloads': {
+		customDir: 'order-confirmation/downloads',
+	},
+	'order-confirmation-billing-address': {
+		customDir: 'order-confirmation/billing-address',
+	},
+	'order-confirmation-shipping-address': {
+		customDir: 'order-confirmation/shipping-address',
+	},
+	'order-confirmation-billing-wrapper': {
+		customDir: 'order-confirmation/billing-wrapper',
+	},
+	'order-confirmation-shipping-wrapper': {
+		customDir: 'order-confirmation/shipping-wrapper',
+	},
+	'order-confirmation-status': {
+		customDir: 'order-confirmation/status',
+	},
+	'order-confirmation-additional-information': {
+		customDir: 'order-confirmation/additional-information',
+	},
 };
 
 // Returns the entries for each block given a relative path (ie: `index.js`,
@@ -100,27 +174,26 @@ const getBlockEntries = ( relativePath ) => {
 
 const entries = {
 	styling: {
-		// @wordpress/components styles
-		'custom-select-control-style':
-			'./node_modules/wordpress-components/src/custom-select-control/style.scss',
-		'snackbar-notice-style':
-			'./node_modules/wordpress-components/src/snackbar/style.scss',
-		'combobox-control-style':
-			'./node_modules/wordpress-components/src/combobox-control/style.scss',
-		'form-token-field-style':
-			'./node_modules/wordpress-components/src/form-token-field/style.scss',
+		// Packages styles
+		'packages-style': glob.sync( './packages/**/index.{t,j}s' ),
 
-		'general-style': glob.sync( './assets/**/*.scss', {
-			ignore: [
-				// Block styles are added below.
-				'./assets/js/blocks/*/*.scss',
-			],
-		} ),
+		// Shared blocks code
+		'wc-blocks': './assets/js/index.js',
 
-		'packages-style': glob.sync( './packages/**/*.scss' ),
+		// Blocks
+		'product-image-gallery':
+			'./assets/js/atomic/blocks/product-elements/product-image-gallery/index.ts',
+		'product-reviews':
+			'./assets/js/atomic/blocks/product-elements/product-reviews/index.tsx',
+		'product-details':
+			'./assets/js/atomic/blocks/product-elements/product-details/index.tsx',
+		'add-to-cart-form':
+			'./assets/js/atomic/blocks/product-elements/add-to-cart-form/index.tsx',
+		...getBlockEntries( '{index,block,frontend}.{t,j}s{,x}' ),
 
-		'reviews-style': './assets/js/blocks/reviews/editor.scss',
-		...getBlockEntries( '**/*.scss' ),
+		// Templates
+		'wc-blocks-classic-template-revert-button-style':
+			'./assets/js/templates/revert-button/index.tsx',
 	},
 	core: {
 		wcBlocksRegistry: './assets/js/blocks-registry/index.js',
@@ -131,6 +204,11 @@ const entries = {
 		wcBlocksSharedHocs: './assets/js/shared/hocs/index.js',
 		priceFormat: './packages/prices/index.js',
 		blocksCheckout: './packages/checkout/index.js',
+		blocksComponents: './packages/components/index.ts',
+
+		// interactivity components, exported as separate entries for now
+		'wc-interactivity-dropdown':
+			'./packages/interactivity-components/dropdown/index.ts',
 	},
 	main: {
 		// Shared blocks code
@@ -140,10 +218,12 @@ const entries = {
 		...getBlockEntries( 'index.{t,j}s{,x}' ),
 	},
 	frontend: {
-		reviews: './assets/js/blocks/reviews/frontend.js',
+		reviews: './assets/js/blocks/reviews/frontend.ts',
 		...getBlockEntries( 'frontend.{t,j}s{,x}' ),
 		'mini-cart-component':
 			'./assets/js/blocks/mini-cart/component-frontend.tsx',
+		'product-button-interactivity':
+			'./assets/js/atomic/blocks/product-elements/button/frontend.tsx',
 	},
 	payments: {
 		'wc-payment-method-cheque':
@@ -160,6 +240,10 @@ const entries = {
 			'./assets/js/extensions/google-analytics/index.ts',
 		'wc-shipping-method-pickup-location':
 			'./assets/js/extensions/shipping-methods/pickup-location/index.js',
+	},
+	editor: {
+		'wc-blocks-classic-template-revert-button':
+			'./assets/js/templates/revert-button/index.tsx',
 	},
 };
 

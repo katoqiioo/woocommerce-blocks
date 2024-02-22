@@ -1,3 +1,11 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # Blocks Registry <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
@@ -18,7 +26,7 @@
 -   [`hasInnerBlocks( blockName )`](#hasinnerblocks-blockname-)
     -   [Usage](#usage-2)
 
-This directory contains the Checkout Blocks Registry. This provides functions to **register new Inner Blocks** that can be inserted automatically, or optionally, within the Mini Cart, Cart and Checkout blocks in certain areas.
+This directory contains the Checkout Blocks Registry. This provides functions to **register new Inner Blocks** that can be inserted automatically, or optionally, within the Mini-Cart, Cart and Checkout blocks in certain areas.
 
 Registered Inner Blocks can either be forced within the layout of the Cart/Checkout Block, or they can just be made available to merchants so they can be inserted manually. Inner Blocks registered in this way can also define a component to render on the frontend in place of the Block.
 
@@ -44,7 +52,7 @@ Blocks can be registered within several different areas or parent blocks. Valid 
 | `woocommerce/checkout-shipping-methods-block`    | Within the shipping methods form step.                        |
 | `woocommerce/checkout-payment-methods-block`     | Within the payment methods form step.                         |
 
-See the `innerBlockAreas` typedef for the most up to date list of available areas.
+See the [`innerBlockAreas`](https://github.com/woocommerce/woocommerce-blocks/blob/6b9955d2a51bc56b0b029edc521ff98e3403dffc/packages/checkout/blocks-registry/types.ts#L8-L33) typedef for the most up to date list of available areas.
 
 ## Registering a Block
 

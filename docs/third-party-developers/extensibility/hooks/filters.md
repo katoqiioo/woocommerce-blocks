@@ -1,3 +1,11 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 <!-- DO NOT UPDATE THIS DOC DIRECTLY -->
 
 <!-- Use `npm run build:docs` to automatically build hook documentation -->
@@ -11,11 +19,13 @@
  - [__experimental_woocommerce_blocks_add_data_attributes_to_namespace](#__experimental_woocommerce_blocks_add_data_attributes_to_namespace)
  - [__experimental_woocommerce_blocks_payment_gateway_features_list](#__experimental_woocommerce_blocks_payment_gateway_features_list)
  - [deprecated_function_trigger_error](#deprecated_function_trigger_error)
+ - [loop_shop_per_page](#loop_shop_per_page)
  - [wc_session_expiration](#wc_session_expiration)
  - [woocommerce_add_cart_item](#woocommerce_add_cart_item)
  - [woocommerce_add_cart_item_data](#woocommerce_add_cart_item_data)
+ - [woocommerce_add_to_cart_quantity](#woocommerce_add_to_cart_quantity)
  - [woocommerce_add_to_cart_sold_individually_quantity](#woocommerce_add_to_cart_sold_individually_quantity)
- - [woocommerce_add_to_cart_validation](#-woocommerce_add_to_cart_validation)
+ - [woocommerce_add_to_cart_validation](#woocommerce_add_to_cart_validation)
  - [woocommerce_adjust_non_base_location_prices](#woocommerce_adjust_non_base_location_prices)
  - [woocommerce_apply_base_tax_for_local_pickup](#woocommerce_apply_base_tax_for_local_pickup)
  - [woocommerce_apply_individual_use_coupon](#woocommerce_apply_individual_use_coupon)
@@ -25,23 +35,26 @@
  - [woocommerce_blocks_product_grid_item_html](#woocommerce_blocks_product_grid_item_html)
  - [woocommerce_blocks_register_script_dependencies](#woocommerce_blocks_register_script_dependencies)
  - [woocommerce_cart_contents_changed](#woocommerce_cart_contents_changed)
+ - [woocommerce_cart_item_permalink](#woocommerce_cart_item_permalink)
  - [woocommerce_disable_compatibility_layer](#woocommerce_disable_compatibility_layer)
  - [woocommerce_ga_disable_tracking](#woocommerce_ga_disable_tracking)
  - [woocommerce_get_item_data](#woocommerce_get_item_data)
  - [woocommerce_loop_add_to_cart_args](#woocommerce_loop_add_to_cart_args)
  - [woocommerce_loop_add_to_cart_link](#woocommerce_loop_add_to_cart_link)
  - [woocommerce_new_customer_data](#woocommerce_new_customer_data)
+ - [woocommerce_pay_order_product_has_enough_stock](#woocommerce_pay_order_product_has_enough_stock)
+ - [woocommerce_pay_order_product_in_stock](#woocommerce_pay_order_product_in_stock)
  - [woocommerce_registration_errors](#woocommerce_registration_errors)
- - [woocommerce_shared_settings](#-woocommerce_shared_settings)
+ - [woocommerce_shared_settings](#woocommerce_shared_settings)
  - [woocommerce_shipping_package_name](#woocommerce_shipping_package_name)
- - [woocommerce_shipping_{$this->id}_is_available](#woocommerce_shipping_-this--id-_is_available)
+ - [woocommerce_shipping_{$this->id}_is_available](#woocommerce_shipping_this-id_is_available)
  - [woocommerce_show_page_title](#woocommerce_show_page_title)
+ - [woocommerce_single_product_image_thumbnail_html](#woocommerce_single_product_image_thumbnail_html)
  - [woocommerce_store_api_add_to_cart_data](#woocommerce_store_api_add_to_cart_data)
  - [woocommerce_store_api_disable_nonce_check](#woocommerce_store_api_disable_nonce_check)
  - [woocommerce_store_api_product_quantity_limit](#woocommerce_store_api_product_quantity_limit)
- - [woocommerce_store_api_product_quantity_{$value_type}](#woocommerce_store_api_product_quantity_-value_type)
+ - [woocommerce_store_api_product_quantity_{$value_type}](#woocommerce_store_api_product_quantity_value_type)
  - [woocommerce_store_api_rate_limit_options](#woocommerce_store_api_rate_limit_options)
- - [woocommerce_variation_option_name](#woocommerce_variation_option_name)
 
 ---
 
@@ -165,6 +178,23 @@ apply_filters( 'deprecated_function_trigger_error', bool $trigger )
 
 ---
 
+## loop_shop_per_page
+
+
+
+
+```php
+apply_filters( 'loop_shop_per_page' )
+```
+
+### Source
+
+
+ - [BlockTypes/ProductQuery.php](../../../../src/BlockTypes/ProductQuery.php)
+ - [BlockTypes/ProductCollection.php](../../../../src/BlockTypes/ProductCollection.php)
+
+---
+
 ## wc_session_expiration
 
 
@@ -242,12 +272,35 @@ apply_filters( 'woocommerce_add_cart_item_data', array $cart_item_data, integer 
 ### Returns
 
 
-`array` 
+`array`
 
 ### Source
 
 
  - [StoreApi/Utilities/CartController.php](../../../../src/StoreApi/Utilities/CartController.php)
+
+---
+
+## woocommerce_add_to_cart_quantity
+
+
+Filters the change the quantity to add to cart.
+
+```php
+apply_filters( 'woocommerce_add_to_cart_quantity', \Automattic\WooCommerce\Blocks\BlockTypes\number $default_quantity, \Automattic\WooCommerce\Blocks\BlockTypes\number $product_id )
+```
+
+### Parameters
+
+| Argument | Type | Description |
+| -------- | ---- | ----------- |
+| $default_quantity | \Automattic\WooCommerce\Blocks\BlockTypes\number | The default quantity. |
+| $product_id | \Automattic\WooCommerce\Blocks\BlockTypes\number | The product id. |
+
+### Source
+
+
+ - [BlockTypes/ProductButton.php](../../../../src/BlockTypes/ProductButton.php)
 
 ---
 
@@ -276,7 +329,7 @@ apply_filters( 'woocommerce_add_to_cart_sold_individually_quantity', integer $so
 ### Returns
 
 
-`integer` 
+`integer`
 
 ### Source
 
@@ -314,7 +367,7 @@ apply_filters( 'woocommerce_add_to_cart_validation', boolean $passed_validation,
 ### Returns
 
 
-`boolean` 
+`boolean`
 
 ### Source
 
@@ -348,7 +401,7 @@ apply_filters( 'woocommerce_adjust_non_base_location_prices', boolean $adjust_no
 ### Returns
 
 
-`boolean` 
+`boolean`
 
 ### Source
 
@@ -396,7 +449,7 @@ apply_filters( 'woocommerce_apply_individual_use_coupon', array $coupons, \WC_Co
 ### Returns
 
 
-`array` 
+`array`
 
 ### Source
 
@@ -429,7 +482,7 @@ apply_filters( 'woocommerce_apply_with_individual_use_coupon', boolean $apply_wi
 ### Returns
 
 
-`boolean` 
+`boolean`
 
 ### Source
 
@@ -540,7 +593,7 @@ apply_filters( 'woocommerce_blocks_register_script_dependencies', array $depende
 ### Returns
 
 
-`array` 
+`array`
 
 ### Source
 
@@ -576,6 +629,34 @@ apply_filters( 'woocommerce_cart_contents_changed', array $cart_contents )
 
 
  - [StoreApi/Utilities/CartController.php](../../../../src/StoreApi/Utilities/CartController.php)
+
+---
+
+## woocommerce_cart_item_permalink
+
+
+Filter the product permalink.
+
+```php
+apply_filters( 'woocommerce_cart_item_permalink', string $product_permalink, array $cart_item, string $cart_item_key )
+```
+
+### Description
+
+<p>This is a hook taken from the legacy cart/mini-cart templates that allows the permalink to be changed for a product. This is specific to the cart endpoint.</p>
+
+### Parameters
+
+| Argument | Type | Description |
+| -------- | ---- | ----------- |
+| $product_permalink | string | Product permalink. |
+| $cart_item | array | Cart item array. |
+| $cart_item_key | string | Cart item key. |
+
+### Source
+
+
+ - [StoreApi/Schemas/V1/CartItemSchema.php](../../../../src/StoreApi/Schemas/V1/CartItemSchema.php)
 
 ---
 
@@ -657,7 +738,7 @@ apply_filters( 'woocommerce_get_item_data', array $item_data, array $cart_item )
 ### Returns
 
 
-`array` 
+`array`
 
 ### Source
 
@@ -710,7 +791,7 @@ apply_filters( 'woocommerce_loop_add_to_cart_link', string $class )
 Filters customer data before a customer account is registered.
 
 ```php
-apply_filters( 'woocommerce_new_customer_data', array $customer_data )
+apply_filters( 'woocommerce_new_customer_data', array $add_to_cart_data )
 ```
 
 ### Description
@@ -726,12 +807,60 @@ apply_filters( 'woocommerce_new_customer_data', array $customer_data )
 ### Returns
 
 
-`array` 
+`array`
 
 ### Source
 
 
  - [StoreApi/Routes/V1/Checkout.php](../../../../src/StoreApi/Routes/V1/Checkout.php)
+
+---
+
+## woocommerce_pay_order_product_has_enough_stock
+
+
+Filters whether or not the product has enough stock.
+
+```php
+apply_filters( 'woocommerce_pay_order_product_has_enough_stock', boolean $argument0, \WC_Product $product, \WC_Order $order )
+```
+
+### Parameters
+
+| Argument | Type | Description |
+| -------- | ---- | ----------- |
+| 1 | boolean | True if has enough stock. |
+| $product | \WC_Product | Product. |
+| $order | \WC_Order | Order. |
+
+### Source
+
+
+ - [StoreApi/Utilities/OrderController.php](../../../../src/StoreApi/Utilities/OrderController.php)
+
+---
+
+## woocommerce_pay_order_product_in_stock
+
+
+Filters whether or not the product is in stock for this pay for order.
+
+```php
+apply_filters( 'woocommerce_pay_order_product_in_stock', boolean $argument0, \WC_Product $product, \WC_Order $order )
+```
+
+### Parameters
+
+| Argument | Type | Description |
+| -------- | ---- | ----------- |
+| 1 | boolean | True if in stock. |
+| $product | \WC_Product | Product. |
+| $order | \WC_Order | Order. |
+
+### Source
+
+
+ - [StoreApi/Utilities/OrderController.php](../../../../src/StoreApi/Utilities/OrderController.php)
 
 ---
 
@@ -762,7 +891,7 @@ apply_filters( 'woocommerce_registration_errors', \WP_Error $errors, string $use
 ### Returns
 
 
-`\WP_Error` 
+`\WP_Error`
 
 ### Source
 
@@ -796,7 +925,7 @@ apply_filters( 'woocommerce_shared_settings', array $data )
 ### Returns
 
 
-`array` 
+`array`
 
 ### Source
 
@@ -873,6 +1002,29 @@ apply_filters( 'woocommerce_show_page_title' )
 
 ---
 
+## woocommerce_single_product_image_thumbnail_html
+
+
+Filter the HTML markup for a single product image thumbnail in the gallery.
+
+```php
+apply_filters( 'woocommerce_single_product_image_thumbnail_html', string $thumbnail_html, int $attachment_id )
+```
+
+### Parameters
+
+| Argument | Type | Description |
+| -------- | ---- | ----------- |
+| $thumbnail_html | string | The HTML markup for the thumbnail. |
+| $attachment_id | int | The attachment ID of the thumbnail. |
+
+### Source
+
+
+ - [BlockTypes/ProductGalleryThumbnails.php](../../../../src/BlockTypes/ProductGalleryThumbnails.php)
+
+---
+
 ## woocommerce_store_api_add_to_cart_data
 
 
@@ -895,7 +1047,7 @@ apply_filters( 'woocommerce_store_api_add_to_cart_data', array $customer_data )
 ### Returns
 
 
-`array` 
+`array`
 
 ### Source
 
@@ -926,7 +1078,7 @@ apply_filters( 'woocommerce_store_api_disable_nonce_check', boolean $disable_non
 ### Returns
 
 
-`boolean` 
+`boolean`
 
 ### Source
 
@@ -958,7 +1110,7 @@ apply_filters( 'woocommerce_store_api_product_quantity_limit', integer $quantity
 ### Returns
 
 
-`integer` 
+`integer`
 
 ### Source
 
@@ -991,7 +1143,7 @@ apply_filters( 'woocommerce_store_api_product_quantity_{$value_type}', mixed $va
 ### Returns
 
 
-`mixed` 
+`mixed`
 
 ### Source
 
@@ -1018,49 +1170,12 @@ apply_filters( 'woocommerce_store_api_rate_limit_options', array $rate_limit_opt
 ### Returns
 
 
-`array` 
+`array`
 
 ### Source
 
 
  - [StoreApi/Utilities/RateLimits.php](../../../../src/StoreApi/Utilities/RateLimits.php)
-
----
-
-## woocommerce_variation_option_name
-
-
-Filters the variation option name.
-
-```php
-apply_filters( 'woocommerce_variation_option_name', string $value, null $unused, string $taxonomy, \WC_Product $product )
-```
-
-
-**Note: Matches filter name in WooCommerce core.**
-
-### Description
-
-<p>Filters the variation option name for custom option slugs.</p>
-
-### Parameters
-
-| Argument | Type | Description |
-| -------- | ---- | ----------- |
-| $value | string | The name to display. |
-| $unused | null | Unused because this is not a variation taxonomy. |
-| $taxonomy | string | Taxonomy or product attribute name. |
-| $product | \WC_Product | Product data. |
-
-### Returns
-
-
-`string` 
-
-### Source
-
-
- - [StoreApi/Schemas/V1/CartItemSchema.php](../../../../src/StoreApi/Schemas/V1/CartItemSchema.php)
 
 ---
 <!-- FEEDBACK -->

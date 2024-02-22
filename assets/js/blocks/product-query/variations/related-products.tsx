@@ -6,6 +6,8 @@ import { Icon } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { stacks } from '@woocommerce/icons';
 import { registerBlockSingleProductTemplate } from '@woocommerce/atomic-utils';
+import { getSettingWithCoercion } from '@woocommerce/settings';
+import { isBoolean } from '@woocommerce/types';
 
 /**
  * Internal dependencies
@@ -43,17 +45,29 @@ export const BLOCK_ATTRIBUTES = {
 	},
 };
 
+const postTemplateHasSupportForGridView = getSettingWithCoercion(
+	'postTemplateHasSupportForGridView',
+	false,
+	isBoolean
+);
+
 export const INNER_BLOCKS_TEMPLATE: InnerBlockTemplate[] = [
 	[
 		'core/heading',
 		{
 			level: 2,
 			content: __( 'Related products', 'woo-gutenberg-products-block' ),
+			style: { spacing: { margin: { top: '1rem', bottom: '1rem' } } },
 		},
 	],
 	[
 		'core/post-template',
-		{ __woocommerceNamespace: PRODUCT_TEMPLATE_ID },
+		{
+			__woocommerceNamespace: PRODUCT_TEMPLATE_ID,
+			...( postTemplateHasSupportForGridView && {
+				layout: { type: 'grid', columnCount: 5 },
+			} ),
+		},
 		[
 			[
 				'woocommerce/product-image',
@@ -68,6 +82,7 @@ export const INNER_BLOCKS_TEMPLATE: InnerBlockTemplate[] = [
 					textAlign: 'center',
 					level: 3,
 					fontSize: 'medium',
+					isLink: true,
 					__woocommerceNamespace: PRODUCT_TITLE_ID,
 				},
 				[],

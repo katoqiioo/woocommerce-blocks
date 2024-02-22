@@ -3,13 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-import { CheckboxControl } from '@woocommerce/blocks-checkout';
-import { Textarea } from '@woocommerce/base-components/textarea';
-
-/**
- * Internal dependencies
- */
-import './style.scss';
+import { CheckboxControl, Textarea } from '@woocommerce/blocks-components';
 
 interface CheckoutOrderNotesProps {
 	disabled: boolean;

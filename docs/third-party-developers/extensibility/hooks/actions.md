@@ -1,3 +1,11 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 <!-- DO NOT UPDATE THIS DOC DIRECTLY -->
 
 <!-- Use `npm run build:docs` to automatically build hook documentation -->
@@ -22,12 +30,11 @@
  - [woocommerce_blocks_enqueue_checkout_block_scripts_after](#woocommerce_blocks_enqueue_checkout_block_scripts_after)
  - [woocommerce_blocks_enqueue_checkout_block_scripts_before](#woocommerce_blocks_enqueue_checkout_block_scripts_before)
  - [woocommerce_blocks_loaded](#woocommerce_blocks_loaded)
- - [woocommerce_blocks_{$this->registry_identifier}_registration](#woocommerce_blocks_-this--registry_identifier-_registration)
- - [woocommerce_check_cart_items](#-woocommerce_check_cart_items)
+ - [woocommerce_blocks_{$this->registry_identifier}_registration](#woocommerce_blocks_this-registry_identifier_registration)
+ - [woocommerce_check_cart_items](#woocommerce_check_cart_items)
  - [woocommerce_created_customer](#woocommerce_created_customer)
  - [woocommerce_no_products_found](#woocommerce_no_products_found)
  - [woocommerce_register_post](#woocommerce_register_post)
- - [woocommerce_rest_checkout_process_payment_with_context](#woocommerce_rest_checkout_process_payment_with_context)
  - [woocommerce_shop_loop](#woocommerce_shop_loop)
  - [woocommerce_store_api_cart_errors](#woocommerce_store_api_cart_errors)
  - [woocommerce_store_api_cart_select_shipping_rate](#woocommerce_store_api_cart_select_shipping_rate)
@@ -35,13 +42,12 @@
  - [woocommerce_store_api_cart_update_order_from_request](#woocommerce_store_api_cart_update_order_from_request)
  - [woocommerce_store_api_checkout_order_processed](#woocommerce_store_api_checkout_order_processed)
  - [woocommerce_store_api_checkout_update_customer_from_request](#woocommerce_store_api_checkout_update_customer_from_request)
- - [woocommerce_store_api_checkout_update_order_from_request](#woocommerce_store_api_checkout_update_order_from_request)
  - [woocommerce_store_api_checkout_update_order_meta](#woocommerce_store_api_checkout_update_order_meta)
  - [woocommerce_store_api_rate_limit_exceeded](#woocommerce_store_api_rate_limit_exceeded)
  - [woocommerce_store_api_validate_add_to_cart](#woocommerce_store_api_validate_add_to_cart)
  - [woocommerce_store_api_validate_cart_item](#woocommerce_store_api_validate_cart_item)
- - [woocommerce_{$product->get_type()}_add_to_cart](#woocommerce_-product--get_type-_add_to_cart)
- - [{$hook}](#-hook)
+ - [woocommerce_{$product->get_type()}_add_to_cart](#woocommerce_product-get_type_add_to_cart)
+ - [{$hook}](#hook)
 
 ---
 
@@ -492,34 +498,6 @@ do_action( 'woocommerce_register_post', string $username, string $user_email, \W
 
 ---
 
-## woocommerce_rest_checkout_process_payment_with_context
-
-
-Process payment with context.
-
-```php
-do_action_ref_array( 'woocommerce_rest_checkout_process_payment_with_context', [ \Automattic\WooCommerce\StoreApi\Payments\PaymentContext $context, \Automattic\WooCommerce\StoreApi\Payments\PaymentResult $payment_result ] )
-```
-
-### Parameters
-
-| Argument | Type | Description |
-| -------- | ---- | ----------- |
-| $context | \Automattic\WooCommerce\StoreApi\Payments\PaymentContext | Holds context for the payment, including order ID and payment method. |
-| $payment_result | \Automattic\WooCommerce\StoreApi\Payments\PaymentResult | Result object for the transaction. |
-
-### Exceptions
-
-
-`\Exception` If there is an error taking payment, an \Exception object can be thrown with an error message.
-
-### Source
-
-
- - [StoreApi/Routes/V1/Checkout.php](../../../../src/StoreApi/Routes/V1/Checkout.php)
-
----
-
 ## woocommerce_shop_loop
 
 
@@ -698,6 +676,7 @@ add_action( 'woocommerce_blocks_checkout_order_processed', 'my_function_callback
 ### Source
 
 
+ - [StoreApi/Routes/V1/CheckoutOrder.php](../../../../src/StoreApi/Routes/V1/CheckoutOrder.php)
  - [StoreApi/Routes/V1/Checkout.php](../../../../src/StoreApi/Routes/V1/Checkout.php)
 
 ---
@@ -721,33 +700,7 @@ do_action( 'woocommerce_store_api_checkout_update_customer_from_request', \WC_Cu
 ### Source
 
 
- - [StoreApi/Routes/V1/Checkout.php](../../../../src/StoreApi/Routes/V1/Checkout.php)
-
----
-
-## woocommerce_store_api_checkout_update_order_from_request
-
-
-Fires when the Checkout Block/Store API updates an order's from the API request data.
-
-```php
-do_action( 'woocommerce_store_api_checkout_update_order_from_request', \WC_Order $order, \WP_REST_Request $request )
-```
-
-### Description
-
-<p>This hook gives extensions the chance to update orders based on the data in the request. This can be used in conjunction with the ExtendSchema class to post custom data and then process it.</p>
-
-### Parameters
-
-| Argument | Type | Description |
-| -------- | ---- | ----------- |
-| $order | \WC_Order | Order object. |
-| $request | \WP_REST_Request | Full details about the request. |
-
-### Source
-
-
+ - [StoreApi/Routes/V1/CheckoutOrder.php](../../../../src/StoreApi/Routes/V1/CheckoutOrder.php)
  - [StoreApi/Routes/V1/Checkout.php](../../../../src/StoreApi/Routes/V1/Checkout.php)
 
 ---

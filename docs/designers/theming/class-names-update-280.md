@@ -1,9 +1,17 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # Class names update in 2.8.0 <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
 
-- [Replaced classes](#replaced-classes)
-- [Deprecated classes](#deprecated-classes)
+-   [Replaced classes](#replaced-classes)
+-   [Deprecated classes](#deprecated-classes)
 
 In [WooCommerce Blocks 2.8.0](https://developer.woocommerce.com/2020/06/24/woocommerce-blocks-2-8-release-notes/), we replaced and deprecated some some class names to simplify them, fix inconsistencies, and make it easier to differentiate frontend components from editor components.
 

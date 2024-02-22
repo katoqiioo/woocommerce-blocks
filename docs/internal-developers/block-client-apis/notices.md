@@ -1,3 +1,11 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # Frontend notices <!-- omit in toc -->
 
 ## Table of contents <!-- omit in toc -->
@@ -23,7 +31,7 @@ On the Cart Block, a `StoreNoticesContainer` is already rendered with the `wc/ca
 #### Single context
 
 ```jsx
-import { StoreNoticesContainer } from '@woocommerce/blocks-checkout';
+const { StoreNoticesContainer } = window.wc.blocksCheckout;
 
 const PaymentErrors = () => {
 	return <StoreNoticesContainer context="wc/payment" />;
@@ -33,7 +41,7 @@ const PaymentErrors = () => {
 #### Multiple contexts
 
 ```jsx
-import { StoreNoticesContainer } from '@woocommerce/blocks-checkout';
+const { StoreNoticesContainer } = window.wc.blocksCheckout;
 
 const AddressForm = () => {
 	return (
@@ -52,7 +60,7 @@ const AddressForm = () => {
 WooCommerce Blocks also shows snackbar notices, to add a snackbar notice you need to create a notice with `type:snackbar` in the options object.
 
 ```js
-import { dispatch } from '@wordpress/data';
+const { dispatch } = window.wp.data;
 
 dispatch( 'core/notices' ).createNotice(
 	'snackbar',

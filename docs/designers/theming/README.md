@@ -1,3 +1,11 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # Theming
 
 This page includes all documentation regarding WooCommerce Blocks and themes.
@@ -6,7 +14,7 @@ This page includes all documentation regarding WooCommerce Blocks and themes.
 
 ### Block and component class names
 
-WooCommerce Blocks follows BEM for class names, as [stated in our coding guidelines](../../contributors/contributing/coding-guidelines.md). All classes start with one of these two prefixes:
+WooCommerce Blocks follows BEM for class names, as [stated in our coding guidelines](../../contributors/coding-guidelines.md). All classes start with one of these two prefixes:
 
 -   `.wc-block-`: class names specific to a single block.
 -   `.wc-block-components-`: class names specific to a component. The component might be reused by different blocks.
@@ -69,7 +77,7 @@ WooCommerce Blocks avoids using legacy unprefixed classes as much as possible. H
 
 ## Blocks
 
--   [All Products & filters](all-products-and-filters.md)
+-   [Filter blocks](filter-blocks.md)
 -   [Cart and Checkout](cart-and-checkout.md)
 
 ## Other docs

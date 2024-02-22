@@ -1,15 +1,23 @@
-# Rate Limiting for Store API endpoints  <!-- omit in toc -->
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
+# Rate Limiting for Store API endpoints <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
 
-- [Limit information](#limit-information)
-- [Methods restricted by Rate Limiting](#methods-restricted-by-rate-limiting)
-- [Rate Limiting options filter](#rate-limiting-options-filter)
-- [Proxy standard support](#proxy-standard-support)
-- [Limit usage information observability](#limit-usage-information-observability)
-    - [Response headers example](#response-headers-example)
-- [Tracking limit abuses](#tracking-limit-abuses)
-    - [Custom tracking usage example](#custom-tracking-usage-example)
+-   [Limit information](#limit-information)
+-   [Methods restricted by Rate Limiting](#methods-restricted-by-rate-limiting)
+-   [Rate Limiting options filter](#rate-limiting-options-filter)
+-   [Proxy standard support](#proxy-standard-support)
+-   [Limit usage information observability](#limit-usage-information-observability)
+    -   [Response headers example](#response-headers-example)
+-   [Tracking limit abuses](#tracking-limit-abuses)
+    -   [Custom tracking usage example](#custom-tracking-usage-example)
 
 [Rate Limiting](https://github.com/woocommerce/woocommerce-blocks/pull/5962) is available for Store API endpoints. This is optional and disabled by default. It can be enabled by following [these instructions](#rate-limiting-options-filter).
 
@@ -18,7 +26,6 @@ The main purpose prevent abuse on endpoints from excessive calls and performance
 Rate limit tracking is controlled by either `USER ID` (logged in) or `IP ADDRESS` (unauthenticated requests).
 
 It also offers standard support for running behind a proxy, load balancer, etc. This also optional and disabled by default.
-
 
 ## Limit information
 
@@ -47,9 +54,9 @@ add_filter( 'woocommerce_store_api_rate_limit_options', function() {
 
 If the Store is running behind a proxy, load balancer, cache service, CDNs, etc. keying limits by IP is supported through standard IP forwarding headers, namely:
 
-- `X_REAL_IP`|`CLIENT_IP` *Custom popular implementations that simplify obtaining the origin IP for the request*
-- `X_FORWARDED_FOR` *De-facto standard header for identifying the originating IP, [Documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For)*
-- `X_FORWARDED` *[Documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Forwarded), [RFC 7239](https://datatracker.ietf.org/doc/html/rfc7239)*
+-   `X_REAL_IP`|`CLIENT_IP` _Custom popular implementations that simplify obtaining the origin IP for the request_
+-   `X_FORWARDED_FOR` _De-facto standard header for identifying the originating IP, [Documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For)_
+-   `X_FORWARDED` _[Documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Forwarded), [RFC 7239](https://datatracker.ietf.org/doc/html/rfc7239)_
 
 This is disabled by default.
 
@@ -57,10 +64,10 @@ This is disabled by default.
 
 Current limit information can be observed via custom response headers:
 
-- `RateLimit-Limit` *Maximum requests per time frame.*
-- `RateLimit-Remaining` *Requests available during current time frame.*
-- `RateLimit-Reset` *Unix timestamp of next time frame reset.*
-- `RateLimit-Retry-After` *Seconds until requests are unblocked again. Only shown when the limit is reached.*
+-   `RateLimit-Limit` _Maximum requests per time frame._
+-   `RateLimit-Remaining` _Requests available during current time frame._
+-   `RateLimit-Reset` _Unix timestamp of next time frame reset._
+-   `RateLimit-Retry-After` _Seconds until requests are unblocked again. Only shown when the limit is reached._
 
 ### Response headers example
 
@@ -85,13 +92,6 @@ add_action(
 );
 ```
 
----
-
-[We're hiring!](https://woocommerce.com/careers/) Come work with us!
-
-🐞 Found a mistake, or have a suggestion? [Leave feedback about this document here.](https://github.com/woocommerce/woocommerce-gutenberg-products-block/issues/new?assignees=&labels=type%3A+documentation&template=--doc-feedback.md&title=Feedback%20on%20./src/StoreApi/docs/rate-limiting.md)
-
-<!-- /FEEDBACK -->
 <!-- FEEDBACK -->
 
 ---

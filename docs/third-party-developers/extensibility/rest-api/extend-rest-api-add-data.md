@@ -1,21 +1,29 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # Exposing your data in the Store API. <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
 
-- [The problem](#the-problem)
-- [Solution](#solution)
-- [Basic usage](#basic-usage)
-- [Things To Consider](#things-to-consider)
-    - [ExtendSchema is a shared instance](#extendschema-is-a-shared-instance)
-    - [Errors and fatals are silence for non-admins](#errors-and-fatals-are-silence-for-non-admins)
-    - [Callbacks should always return an array](#callbacks-should-always-return-an-array)
-- [API Definition](#api-definition)
-- [Putting it all together](#putting-it-all-together)
-- [Formatting your data](#formatting-your-data)
+-   [The problem](#the-problem)
+-   [Solution](#solution)
+-   [Basic usage](#basic-usage)
+-   [Things To Consider](#things-to-consider)
+    -   [ExtendSchema is a shared instance](#extendschema-is-a-shared-instance)
+    -   [Errors and fatals are silence for non-admins](#errors-and-fatals-are-silence-for-non-admins)
+    -   [Callbacks should always return an array](#callbacks-should-always-return-an-array)
+-   [API Definition](#api-definition)
+-   [Putting it all together](#putting-it-all-together)
+-   [Formatting your data](#formatting-your-data)
 
 ## The problem
 
-You want to extend the Mini Cart, Cart and Checkout blocks, but you want to use some custom data not available on Store API or the context. You don't want to create your own endpoints or Ajax actions. You want to piggyback on the existing StoreAPI calls.
+You want to extend the Mini-Cart, Cart and Checkout blocks, but you want to use some custom data not available on Store API or the context. You don't want to create your own endpoints or Ajax actions. You want to piggyback on the existing StoreAPI calls.
 
 ## Solution
 

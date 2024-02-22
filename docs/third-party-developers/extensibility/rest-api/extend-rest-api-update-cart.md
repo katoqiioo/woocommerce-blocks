@@ -1,3 +1,11 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # Updating the cart with the Store API <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
@@ -143,7 +151,7 @@ When the `Redeem` button gets clicked, you want to tell the server how many poin
 To do this, you will need to use `extensionCartUpdate` to tell the server you want to execute your callback, and have the new cart state loaded into the UI. The `onClick` handler of the button may look like this:
 
 ```js
-import { extensionCartUpdate } from '@woocommerce/blocks-checkout';
+const { extensionCartUpdate } = window.wc.blocksCheckout;
 
 const buttonClickHandler = () => {
 	extensionCartUpdate( {
@@ -192,4 +200,3 @@ Now that this is registered, when the button is pressed, the `cart/extensions` e
 🐞 Found a mistake, or have a suggestion? [Leave feedback about this document here.](https://github.com/woocommerce/woocommerce-blocks/issues/new?assignees=&labels=type%3A+documentation&template=--doc-feedback.md&title=Feedback%20on%20./docs/third-party-developers/extensibility/rest-api/extend-rest-api-update-cart.md)
 
 <!-- /FEEDBACK -->
-

@@ -1,3 +1,11 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # Available Slots <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
@@ -6,8 +14,10 @@
     -   [Passed parameters](#passed-parameters)
 -   [ExperimentalOrderShippingPackages](#experimentalordershippingpackages)
     -   [Passed parameters](#passed-parameters-1)
+-   [ExperimentalOrderLocalPickupPackages](#experimentalorderlocalpickuppackages)
+    -   [Passed parameters](#passed-parameters-2)
 -   [ExperimentalDiscountsMeta](#experimentaldiscountsmeta)
-    -   [Passed paramters](#passed-paramters)
+    -   [Passed parameters](#passed-parameters-3)
 
 This document presents the list of available Slots that you can use for adding your custom content (Fill).
 
@@ -18,6 +28,27 @@ If you want to add a new SlotFill component, check the [Checkout - Slot Fill doc
 ## ExperimentalOrderMeta
 
 This Slot renders below the Checkout summary section and above the "Proceed to Checkout" button in the Cart.
+
+```ts
+const { __ } = window.wp.i18n;
+const { registerPlugin } = window.wp.plugins;
+const { ExperimentalOrderMeta } = window.wc.blocksCheckout;
+
+const render = () => {
+	return (
+		<ExperimentalOrderMeta>
+			<div class="wc-block-components-totals-wrapper">
+				{ __( 'Yearly recurring total ...', 'YOUR-TEXTDOMAIN' ) }
+			</div>
+		</ExperimentalOrderMeta>
+	);
+};
+
+registerPlugin( 'slot-and-fill-examples', {
+	render,
+	scope: 'woocommerce-checkout',
+} );
+```
 
 Cart:
 
@@ -36,6 +67,25 @@ Checkout:
 ## ExperimentalOrderShippingPackages
 
 This slot renders inside the shipping step of Checkout and inside the shipping options in Cart.
+
+```ts
+const { __ } = window.wp.i18n;
+const { registerPlugin } = window.wp.plugins;
+const { ExperimentalOrderShippingPackages } = window.wc.blocksCheckout;
+
+const render = () => {
+	return (
+		<ExperimentalOrderShippingPackages>
+			<div>{ __( 'Express Shipping', 'YOUR-TEXTDOMAIN' ) }</div>
+		</ExperimentalOrderShippingPackages>
+	);
+};
+
+registerPlugin( 'slot-and-fill-examples', {
+	render,
+	scope: 'woocommerce-checkout',
+} );
+```
 
 Cart:
 
@@ -61,6 +111,30 @@ Checkout:
 
 This slot renders inside the Checkout Pickup Options block in the Checkout block. It does not render in the Cart block.
 
+```ts
+const { __ } = window.wp.i18n;
+const { registerPlugin } = window.wp.plugins;
+const { ExperimentalOrderLocalPickupPackages } = window.wc.blocksCheckout;
+
+const render = () => {
+	return (
+		<ExperimentalOrderLocalPickupPackages>
+			<div>
+				{ __(
+					'By using our convenient local pickup option, you can come to our store and pick up your order. We will send you and email when your order is ready for pickup.',
+					'YOUR-TEXTDOMAIN'
+				) }
+			</div>
+		</ExperimentalOrderLocalPickupPackages>
+	);
+};
+
+registerPlugin( 'slot-and-fill-examples', {
+	render,
+	scope: 'woocommerce-checkout',
+} );
+```
+
 Checkout:
 
 ![Example of ExperimentalOrderLocalPickupPackages in the Checkout block](https://user-images.githubusercontent.com/5656702/222814945-a449d016-0621-4a70-b0f4-2ae1ce6487f1.png)
@@ -76,6 +150,27 @@ Checkout:
 
 This slot renders below the `CouponCode` input.
 
+```ts
+const { __ } = window.wp.i18n;
+const { registerPlugin } = window.wp.plugins;
+const { ExperimentalDiscountsMeta } = window.wc.blocksCheckout;
+
+const render = () => {
+	return (
+		<ExperimentalDiscountsMeta>
+			<div class="wc-block-components-totals-wrapper">
+				{ __( 'You have 98683 coins to spend ...', 'YOUR-TEXTDOMAIN' ) }
+			</div>
+		</ExperimentalDiscountsMeta>
+	);
+};
+
+registerPlugin( 'slot-and-fill-examples', {
+	render,
+	scope: 'woocommerce-checkout',
+} );
+```
+
 Cart:
 
 ![Cart showing ExperimentalDiscountsMeta location](https://user-images.githubusercontent.com/5656702/122774218-ea27a880-d2a0-11eb-9450-11f119567f26.png)
@@ -84,7 +179,7 @@ Checkout:
 
 ![Checkout showing ExperimentalDiscountsMeta location](https://user-images.githubusercontent.com/5656702/122779606-efd3bd00-d2a5-11eb-8c84-6525eca5d704.png)
 
-### Passed paramters
+### Passed parameters
 
 -   `cart`: `wc/store/cart` data but in `camelCase` instead of `snake_case`. [Object breakdown.](https://github.com/woocommerce/woocommerce-gutenberg-products-block/blob/c00da597efe4c16fcf5481c213d8052ec5df3766/assets/js/type-defs/cart.ts#L172-L188)
 -   `extensions`: external data registered by third-party developers using `ExtendSchema`, if you used `ExtendSchema` on `wc/store/cart` you would find your data under your namespace here.
@@ -99,4 +194,3 @@ Checkout:
 🐞 Found a mistake, or have a suggestion? [Leave feedback about this document here.](https://github.com/woocommerce/woocommerce-blocks/issues/new?assignees=&labels=type%3A+documentation&template=--doc-feedback.md&title=Feedback%20on%20./docs/third-party-developers/extensibility/checkout-block/available-slot-fills.md)
 
 <!-- /FEEDBACK -->
-

@@ -1,6 +1,14 @@
-# Validation data store
+# 📣 Announcement: New documentation location
 
-See also [third-party developers' validation documentation](../../third-party-developers/extensibility/data-store/validation.md).
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
+# Validation Store <!-- omit in toc -->
+
+See also [third-party developers' Validation Store documentation](../../third-party-developers/extensibility/data-store/validation.md).
 
 The `wc/store/validation` store contains information about the current validity, visibility, and associated error message of _something_.
 

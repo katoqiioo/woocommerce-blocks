@@ -1,9 +1,17 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # Translations in JS/TS files
 
 In comparison to PHP files, translations in JS/TS files require a few additional steps. To use translation functions in JS/TS, the dependency `@wordpress/i18n` needs to be included at the top of the corresponding file:
 
 ```ts
-import { sprintf, _n } from '@wordpress/i18n';
+const { sprintf, _n } = window.wp.i18n;
 ```
 
 Once that dependency had been included, the translation function can than be used.
@@ -19,7 +27,7 @@ The function `__()` retrieves the translation of `$text`.
 const translation = __( string text, string domain = 'default' );
 
 // Example
-import { __ } from '@wordpress/i18n';
+const { __ } = window.wp.i18n;
 
 const translation = __( 'Place Order', 'woo-gutenberg-products-block' );
 ```
@@ -35,7 +43,7 @@ The function `_n()` translates and retrieves the singular or plural form based o
 const translation = _n( string single, string plural, int number, string domain = 'default' );
 
 // Example
-import { sprintf, _n } from '@wordpress/i18n';
+const { sprintf, _n } = window.wp.i18n;
 
 const translation = sprintf(
     /* translators: %s number of products in cart. */
@@ -60,7 +68,7 @@ The function `_x()` retrieves a translated string with gettext context.
 const translation = _x( string text, string context, string domain = 'default' );
 
 // Example
-import { _x } from '@wordpress/i18n';
+const { _x } = window.wp.i18n;
 
 const translation = _x( 'Draft', 'Order status', 'woo-gutenberg-products-block' );
 ```
@@ -76,7 +84,7 @@ The function `_nx()` translates and retrieves the singular or plural form based 
 const translation = _nx( string single, string plural, int number, string context, string domain = 'default' );
 
 // Example
-import { sprintf, _nx } from '@wordpress/i18n';
+const { sprintf, _nx } = window.wp.i18n;
 
 const translation = sprintf(
     /* translators: %s number of products in cart. */

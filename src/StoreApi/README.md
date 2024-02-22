@@ -1,14 +1,22 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # WooCommerce Store API <!-- omit in toc -->
 
 ## Table of contents <!-- omit in toc -->
 
-- [Requirements and limitations](#requirements-and-limitations)
-- [Store API Namespace](#store-api-namespace)
-- [Resources and endpoints](#resources-and-endpoints)
-- [Pagination](#pagination)
-- [Status codes](#status-codes)
-- [Contributing](#contributing)
-- [Extensibility](#extensibility)
+-   [Requirements and limitations](#requirements-and-limitations)
+-   [Store API Namespace](#store-api-namespace)
+-   [Resources and endpoints](#resources-and-endpoints)
+-   [Pagination](#pagination)
+-   [Status codes](#status-codes)
+-   [Contributing](#contributing)
+-   [Extensibility](#extensibility)
 
 **The Store API provides public Rest API endpoints for the development of customer-facing cart, checkout, and product functionality. It follows many of the patterns used in the [WordPress REST API](https://developer.wordpress.org/rest-api/key-concepts/).**
 
@@ -66,7 +74,9 @@ Available resources in the Store API are listed below, with links to more detail
 |                                                              | `GET`, `POST`, `PUT`, `DELETE` | [`/wc/store/v1/cart/items/:key`](docs/cart-items.md#single-cart-item)                         |
 | [`Cart Coupons`](docs/cart-coupons.md)                       | `GET`, `POST`, `DELETE`        | [`/wc/store/v1/cart/coupons`](docs/cart-coupons.md#list-cart-coupons)                         |
 |                                                              | `GET`, `DELETE`                | [`/wc/store/v1/cart/coupon/:code`](docs/cart-coupons.md#single-cart-coupon)                   |
-| [`Checkout`](docs/checkout.md)                               | `GET`, `POST`                  | [`/wc/store/v1/checkout`](docs/checkout.md)                                                   |
+| [`Checkout`](docs/checkout.md)                               | `GET`, `POST`                  | [`/wc/store/v1/checkout`](docs/checkout.md)     
+| [`Checkout order`](docs/checkout-order.md)                   | `POST`                         | [`/wc/store/v1/checkout/:id`](docs/checkout-order.md)                                             |
+| [`Order`](docs/order.md)                                     | `GET`                          | [`/wc/store/v1/order/:id`](docs/order.md)  
 | [`Products`](docs/products.md)                               | `GET`                          | [`/wc/store/v1/products`](docs/products.md#list-products)                                     |
 |                                                              | `GET`                          | [`/wc/store/v1/products/:id`](docs/products.md#single-product)                                |
 | [`Product Collection Data`](docs/product-collection-data.md) | `GET`                          | [`/wc/store/v1/products/collection-data`](docs/product-collection-data.md)                    |
@@ -144,7 +154,7 @@ Please review the [Store API Guiding principles](./docs/guiding-principles.md). 
 
 ## Extensibility
 
-The approach to extensibility within the Store API is to expose certain routes and schema to the ExtendSchema class. [Documentation for contributors on this can be found here](../../docs/third-party-developers/extensibility/rest-api/extend-rest-api-new-endpoint.md).
+The approach to extensibility within the Store API is to expose certain routes and schema to the ExtendSchema class. [Documentation for contributors on this can be found here](../../docs/internal-developers/rest-api/extend-rest-api-new-endpoint.md).
 
 If a route includes the extensibility interface, 3rd party developers can use the shared `ExtendSchema::class` instance to register additional endpoint data and additional schema.
 

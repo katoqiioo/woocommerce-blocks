@@ -1,6 +1,14 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # Changelog Script
 
-This folder contains the logic for a changelog script that can be used for generating changelog entries from either pull requests added to a Github milestone, or pull requests that are part of a Zenhub release.
+This folder contains the logic for a changelog script that can be used for generating changelog entries from either pull requests added to a GitHub milestone, or pull requests that are part of a Zenhub release.
 
 ## Usage
 
@@ -37,16 +45,16 @@ The 'variable' in the following table can be used in `package.json` or as a cli 
 | defaultPrefix    | When there is no label with the `labelPrefix` on a pull, this is the default type that will be used for the changelog entry (defaults to `dev`).                          |
 | changelogSrcType | Either "MILESTONE" (default) or "ZENHUB_RELEASE". This determines what will serve as the source for the changelog entries.                                                |
 | devNoteLabel     | If a pull has this label then `[DN]` will be appended to the end of the changelog. It's a good way to indicate what entries have (or will have) dev notes.                |
-| repo             | This is the namespace for the github repository used as the source for pulls used in the changelog entries. Example: `'woocommerce/woocommerce-gutenberg-products-block'` |
-| ghApiToken       | You can pass your github api token to the script. NOTE: Strongly recommend you use environment variable for this.                                                         |
-| zhApiKey         | You can pass your zenhub api key to the script using this config. NOTE: Strongly recommend you use environment variable for this.                                         |
+| repo             | This is the namespace for the GitHub repository used as the source for pulls used in the changelog entries. Example: `'woocommerce/woocommerce-gutenberg-products-block'` |
+| githubToken      | You can pass your GitHub API token to the script. NOTE: Strongly recommend you use environment variable for this (`GITHUB_TOKEN`).                                        |
+| zhApiKey         | You can pass your Zenhub api key to the script using this config. NOTE: Strongly recommend you use environment variable for this.                                         |
 
 The two environment variables you can use are:
 
 | Environment Variable | Description                                                   |
 | -------------------- | ------------------------------------------------------------- |
-| GH_API_TOKEN         | Github API token for authorizing on the github API.           |
-| ZH_API_TOKEN         | Zenhub api token used for authorizing against the zenhub API. |
+| GITHUB_TOKEN         | GitHub API token for authorizing on the GitHub API.           |
+| ZH_API_TOKEN         | Zenhub API token used for authorizing against the Zenhub API. |
 
 ### Examples
 
@@ -66,11 +74,11 @@ The two environment variables you can use are:
 #### Environment Variable
 
 ```bash
-GH_API_TOKEN="1343ASDFQWER13241REASD" node ./bin/changelog
+GITHUB_TOKEN="1343ASDFQWER13241REASD" node ./bin/changelog
 ```
 
 #### Command Line
 
 ```bash
-node ./bin/changelog --labelPrefix="type:" --skipLabel="skip-changelog" --defaultPrefix="dev" --repo="woocommerce/woocommerce-gutenberg-products-block" --ghApiToken="1343ASDFQWER13241REASD"
+node ./bin/changelog --labelPrefix="type:" --skipLabel="skip-changelog" --defaultPrefix="dev" --repo="woocommerce/woocommerce-gutenberg-products-block" --githubToken="1343ASDFQWER13241REASD"
 ```

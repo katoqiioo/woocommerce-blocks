@@ -8,12 +8,16 @@ import type {
 	CartResponseShippingAddress,
 } from '@woocommerce/types';
 import {
+	AddressFields,
 	defaultAddressFields,
 	ShippingAddress,
 	BillingAddress,
-	getSetting,
 } from '@woocommerce/settings';
 import { decodeEntities } from '@wordpress/html-entities';
+import {
+	SHIPPING_COUNTRIES,
+	SHIPPING_STATES,
+} from '@woocommerce/block-settings';
 
 /**
  * Compare two addresses and see if they are the same.
@@ -90,7 +94,9 @@ export const emptyHiddenAddressFields = <
 >(
 	address: T
 ): T => {
-	const fields = Object.keys( defaultAddressFields );
+	const fields = Object.keys(
+		defaultAddressFields
+	) as ( keyof AddressFields )[];
 	const addressFields = prepareAddressFields( fields, {}, address.country );
 	const newAddress = Object.assign( {}, address ) as T;
 
@@ -116,24 +122,16 @@ export const formatShippingAddress = (
 	if ( Object.values( address ).length === 0 ) {
 		return null;
 	}
-	const shippingCountries = getSetting< Record< string, string > >(
-		'shippingCountries',
-		{}
-	);
-	const shippingStates = getSetting< Record< string, string > >(
-		'shippingStates',
-		{}
-	);
 	const formattedCountry =
-		typeof shippingCountries[ address.country ] === 'string'
-			? decodeEntities( shippingCountries[ address.country ] )
+		typeof SHIPPING_COUNTRIES[ address.country ] === 'string'
+			? decodeEntities( SHIPPING_COUNTRIES[ address.country ] )
 			: '';
 
 	const formattedState =
-		typeof shippingStates[ address.country ] === 'object' &&
-		typeof shippingStates[ address.country ][ address.state ] === 'string'
+		typeof SHIPPING_STATES[ address.country ] === 'object' &&
+		typeof SHIPPING_STATES[ address.country ][ address.state ] === 'string'
 			? decodeEntities(
-					shippingStates[ address.country ][ address.state ]
+					SHIPPING_STATES[ address.country ][ address.state ]
 			  )
 			: address.state;
 
@@ -154,10 +152,25 @@ export const formatShippingAddress = (
 };
 
 /**
- * Returns true if the address has a city and country.
+ * Checks that all required fields in an address are completed based on the settings in countryLocale.
  */
 export const isAddressComplete = (
 	address: ShippingAddress | BillingAddress
 ): boolean => {
-	return !! address.city && !! address.country;
+	if ( ! address.country ) {
+		return false;
+	}
+	const fields = Object.keys(
+		defaultAddressFields
+	) as ( keyof AddressFields )[];
+	const addressFields = prepareAddressFields( fields, {}, address.country );
+
+	return addressFields.every(
+		( { key = '', hidden = false, required = false } ) => {
+			if ( hidden || ! required ) {
+				return true;
+			}
+			return isValidAddressKey( key, address ) && address[ key ] !== '';
+		}
+	);
 };

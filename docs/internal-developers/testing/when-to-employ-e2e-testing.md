@@ -1,3 +1,11 @@
+# 📣 Announcement: New documentation location
+
+The documentation for WooCommerce Blocks has moved to the [WooCommerce monorepo](https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce-blocks/docs/).
+
+Please refer to the documentation in the new location as the files in this repository will no longer be updated and the repository will be archived.
+
+---
+
 # When to employ end to end (E2E) testing
 
 We use [Puppeteer](https://pptr.dev/) to run tests in a real browser, these are called End to End tests. These tests are fairly expensive to run and often fail randomly due to flaky browser behaviour, with this in mind, we should be careful about when we use them.
@@ -12,4 +20,4 @@ An example of things that _should_ be tested with E2E tests:
 
 1.  Blocks cannot be added to the block editor more than once. Reason: **We cannot really mock the Gutenberg functionality to test that this happens without some serious effort.**
 2.  Fresh cart data is fetched when using the browser's back buttons. Reason: **We need to emulate the behaviour of a browser when the back button is pressed and this can't be done in unit tests.**
-3.  The compatability notice is shown when first adding the checkout block. Reason: **same as 1**
+3.  The compatibility notice is shown when first adding the checkout block. Reason: **same as 1**
